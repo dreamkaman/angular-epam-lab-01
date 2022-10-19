@@ -1,1 +1,61 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  $main-font-family: "Roboto", sans-serif;
+  $main-black-text-color: rgb(0, 0, 0);
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  // font-family: inherit;
+}
+
+body {
+  font-family: var(--main-font-family);
+  color: var(--main-black-text-color);
+  letter-spacing: 0.04em;
+  max-width: 100%;
+  //   background-color: var(--main-white-color);
+  // margin-left: auto;
+  // margin-top: auto;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+}

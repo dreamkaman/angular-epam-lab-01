@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
-  name = "Board name"
+  BoardName = 'Board name';
+  CreationDate = 'Creation date';
 
   constructor() { }
 
