@@ -1,3 +1,2 @@
-<label [for]="paramName">
-    <input type="text" [name]="paramName" (input)="onInput($event)" [value]="inputValue">
-</label>
+<label for="email">E-mail</label>
+<input type="email" name="email" (input)="onInput($event)" [value]="inputValue" ngModel>

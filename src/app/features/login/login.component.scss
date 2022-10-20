@@ -1,3 +1,11 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 200px;
+
+  border: 2px solid green;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -5,7 +13,23 @@ form {
 
   width: 300px;
   padding: 50px;
-  margin: 100px auto 100px;
+  // margin: 100px auto 100px;
 
   background-color: #f0f0f0;
+}
+
+input {
+  width: 100%;
+}
+input {
+  margin-bottom: 10px;
+}
+
+input.ng-invalid.ng-touched {
+  border: 2px solid red;
+  border-radius: 2px;
+}
+
+label {
+  align-self: flex-start;
 }

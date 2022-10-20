@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -7,20 +7,20 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  // onSubmit(event: Event) {
-  //   event.preventDefault();
 
-  //   console.log('Submit works!');
+  onLogin(form: NgForm) {
+    if (form.valid) {
+      console.log(form.value);
+      form.reset();
+      return
+    }
 
-  // }
+    alert('Please, input required values!');
 
-  onSubmit2() {
-    console.log("Submit");
   }
 }

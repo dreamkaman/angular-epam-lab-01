@@ -11,6 +11,7 @@ import { HeaderComponent } from './core/header/header.component';
 import { LoginComponent } from './features/login/login.component';
 import { InputComponent } from './shared/input/input.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { DetailsComponent } from './features/details/details.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
     HeaderComponent,
     LoginComponent,
     InputComponent,
-    DashboardComponent
+    DashboardComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,

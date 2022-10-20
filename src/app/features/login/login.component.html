@@ -1,6 +1,10 @@
 <!-- <form #authForm="ngForm"> -->
-<form (ngSubmit)="onSubmit2()" novalidate>
-    <app-input></app-input>
-    <app-input></app-input>
-    <app-button text="Login" type="submit"></app-button>
-</form>
+<div class="container">
+    <form (ngSubmit)="onLogin(f)" #f="ngForm">
+        <label for="email">Email</label>
+        <input type="email" name="email" autocomplete="false" required ngModel>
+        <label for="password">Password</label>
+        <input type="password" name="password" autocomplete="false" required ngModel>
+        <app-button text="Login"></app-button>
+    </form>
+</div>
