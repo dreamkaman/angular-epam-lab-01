@@ -12,6 +12,9 @@ import { LoginComponent } from './features/login/login.component';
 import { InputComponent } from './shared/input/input.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { DetailsComponent } from './features/details/details.component';
+import { ButtonsListComponent } from './shared/buttons-list/buttons-list.component';
+import { MenuButtonComponent } from './shared/menu-button/menu-button.component';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import { DetailsComponent } from './features/details/details.component';
     LoginComponent,
     InputComponent,
     DashboardComponent,
-    DetailsComponent
+    DetailsComponent,
+    ButtonsListComponent,
+    MenuButtonComponent
   ],
   imports: [
     BrowserModule,

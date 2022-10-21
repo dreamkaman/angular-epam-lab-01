@@ -10,15 +10,6 @@
   justify-content: space-between;
 }
 
-.buttons-list {
-  display: flex;
-  list-style: none;
-}
-
-.buttons-list > li:not(:last-child) {
-  margin-right: 10px;
-}
-
 .boards-list {
   display: flex;
   flex-wrap: wrap;
