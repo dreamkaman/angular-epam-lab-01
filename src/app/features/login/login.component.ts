@@ -1,5 +1,5 @@
 import { HttpParams } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -10,10 +10,7 @@ import { NgForm } from '@angular/forms';
 
 export class LoginComponent implements OnInit {
   @ViewChild('f') loginForm!: NgForm;
-
-  params1 = {
-    inputName: 'password', inputType: 'password', inputTitle: 'Password'
-  };
+  @Output() isLogined: boolean = false;
 
   constructor() { }
 
@@ -38,6 +35,7 @@ export class LoginComponent implements OnInit {
 
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
+      this.isLogined = true;
       this.loginForm.reset();
       return
     }

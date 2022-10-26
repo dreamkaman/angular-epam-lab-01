@@ -17,6 +17,7 @@ import { MenuButtonComponent } from './shared/menu-button/menu-button.component'
 import { AvatarComponent } from './shared/avatar/avatar.component';
 import { TasksListComponent } from './shared/tasks-list/tasks-list.component';
 import { TaskComponent } from './shared/task/task.component';
+import { ContextMenuComponent } from './shared/context-menu/context-menu.component';
 
 
 
@@ -34,12 +35,14 @@ import { TaskComponent } from './shared/task/task.component';
     MenuButtonComponent,
     AvatarComponent,
     TasksListComponent,
-    TaskComponent
+    TaskComponent,
+    ContextMenuComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,8 @@
-<button type="button" class="menu-button">
-    <img src="../../../assets/images/ellipse-dark.png" alt="point">
-    <img src="../../../assets/images/ellipse-dark.png" alt="point">
-    <img src="../../../assets/images/ellipse-dark.png" alt="point">
-</button>
+<div class="wrapper">
+    <button type="button" class="menu-button" (click)="onClickHandler()">
+        <img src="../../../assets/images/ellipse-dark.png" alt="point">
+        <img src="../../../assets/images/ellipse-dark.png" alt="point">
+        <img src="../../../assets/images/ellipse-dark.png" alt="point">
+    </button>
+    <app-context-menu [isVisible]="isVisible"></app-context-menu>
+</div>

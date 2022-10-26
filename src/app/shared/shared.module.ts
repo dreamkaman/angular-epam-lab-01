@@ -7,13 +7,13 @@
 
 
 // @NgModule({
-//   declarations: [
-//     ButtonComponent,
-//     ButtonsListComponent,
-//     MenuButtonComponent
-//   ],
-//   imports: [
-//     CommonModule
-//   ]
+//     declarations: [
+//         ButtonComponent,
+//         ButtonsListComponent,
+//         MenuButtonComponent
+//     ],
+//     imports: [
+//         CommonModule
+//     ]
 // })
 // export class SharedModule { }

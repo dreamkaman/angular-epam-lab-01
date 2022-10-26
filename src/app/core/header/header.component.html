@@ -1,6 +1,6 @@
 <header>
-    <div class="avatar-wrapper">
+    <div class="avatar-wrapper" *ngIf="isLogined">
         <app-avatar> </app-avatar>
     </div>
-    <app-button text="Log out"></app-button>
+    <app-button text="Log out" *ngIf="isLogined"></app-button>
 </header>

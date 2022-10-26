@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-menu-button',
@@ -6,9 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu-button.component.scss']
 })
 export class MenuButtonComponent implements OnInit {
+  @Output() isVisible: boolean = false;
 
   constructor() { }
 
+  onClickHandler() {
+    this.isVisible = !this.isVisible;
+  }
   ngOnInit(): void {
   }
 
