@@ -1,8 +1,16 @@
 header {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+
   padding: 30px;
   font-size: 24px;
   font-weight: 600;
-  text-align: end;
+
   background-color: #f0f0f0;
   color: Red;
+}
+
+.avatar-wrapper {
+  margin-right: 20px;
 }

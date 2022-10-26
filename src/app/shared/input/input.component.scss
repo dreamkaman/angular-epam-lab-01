@@ -1,0 +1,15 @@
+input {
+  width: 100%;
+}
+input {
+  margin-bottom: 10px;
+}
+
+input.ng-invalid.ng-touched {
+  border: 2px solid red;
+  border-radius: 2px;
+}
+
+label {
+  align-self: flex-start;
+}

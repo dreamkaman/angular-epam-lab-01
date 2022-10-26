@@ -1,2 +1,3 @@
-<label for="email">E-mail</label>
-<input type="email" name="email" (input)="onInput($event)" [value]="inputValue" ngModel>
+<label [for]="inputName">{{inputTitle}}
+    <input [type]="inputType" [name]="inputName" (input)="onInput($event)" [value]="inputValue" required ngModel>
+</label>
