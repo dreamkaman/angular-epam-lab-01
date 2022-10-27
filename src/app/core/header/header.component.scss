@@ -1,16 +1,30 @@
 header {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: space-between;
 
   padding: 30px;
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 30px;
+  font-weight: 800;
+  font-family: Roboto, sans-serif;
 
-  background-color: #f0f0f0;
-  color: Red;
+  color: #1976d2;
+  background-color: rgba(134, 134, 134, 0.25);
+}
+.left-wrapper {
+  display: flex;
+  align-items: center;
+}
+.logo-angular {
+  width: 30px;
+  margin-right: 10px;
 }
 
+.right-wrapper {
+  display: flex;
+  align-items: center;
+  // justify-content: center;
+}
 .avatar-wrapper {
   margin-right: 20px;
 }

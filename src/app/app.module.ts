@@ -44,6 +44,7 @@ import { ContextMenuComponent } from './shared/context-menu/context-menu.compone
     HttpClientModule,
     AppRoutingModule
   ],
+  // providers: [LoginServiceService],
   providers: [],
   bootstrap: [AppComponent]
 })

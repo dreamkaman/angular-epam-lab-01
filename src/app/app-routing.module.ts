@@ -4,7 +4,7 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { DetailsComponent } from './features/details/details.component';
 import { LoginComponent } from './features/login/login.component';
 import { NotFoundComponent } from './features/not-found/not-found.component';
-import { BoardComponent } from './shared/board/board.component';
+// import { BoardComponent } from './shared/board/board.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
