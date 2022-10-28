@@ -19,6 +19,8 @@ import { TasksListComponent } from './shared/tasks-list/tasks-list.component';
 import { TaskComponent } from './shared/task/task.component';
 import { ContextMenuComponent } from './shared/context-menu/context-menu.component';
 
+import { StoreModule } from '@ngrx/store';
+import { loginReducer } from './features/login/login.reducer';
 
 
 @NgModule({
@@ -42,10 +44,11 @@ import { ContextMenuComponent } from './shared/context-menu/context-menu.compone
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({ login: loginReducer })
   ],
-  // providers: [LoginServiceService],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
