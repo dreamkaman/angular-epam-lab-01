@@ -1,0 +1,9 @@
+<!-- <div class="context-menu">
+    <app-button text="Edit"></app-button>
+    <app-button text="Delete"></app-button>
+</div> -->
+
+<div class="context-menu" *ngIf="isVisible">
+    <button type="button" (click)="onEdit($event)">Edit</button>
+    <button type="button" (click)="onDelete($event)">Delete</button>
+</div>

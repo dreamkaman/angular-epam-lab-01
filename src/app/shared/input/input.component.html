@@ -1,3 +1,4 @@
 <label [for]="inputName">{{inputTitle}}
-    <input [type]="inputType" [name]="inputName" (input)="onInput($event)" [value]="inputValue" required ngModel>
+    <input [type]="inputType" [name]="inputName" (input)="onInput($event)" [value]="inputValue" required
+        [(ngModel)]="inputName">
 </label>

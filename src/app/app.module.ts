@@ -21,6 +21,7 @@ import { ContextMenuComponent } from './shared/context-menu/context-menu.compone
 
 import { StoreModule } from '@ngrx/store';
 import { loginReducer } from './features/login/login.reducer';
+import { NotFoundComponent } from './features/not-found/not-found.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { loginReducer } from './features/login/login.reducer';
     AvatarComponent,
     TasksListComponent,
     TaskComponent,
-    ContextMenuComponent
+    ContextMenuComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
