@@ -8,7 +8,7 @@ header {
   font-weight: 800;
   font-family: Roboto, sans-serif;
 
-  color: #1976d2;
+  // color: #1976d2;
   background-color: rgba(134, 134, 134, 0.25);
 }
 .left-wrapper {
@@ -27,4 +27,8 @@ header {
 }
 .avatar-wrapper {
   margin-right: 20px;
+}
+
+p {
+  color: #1976d2;
 }

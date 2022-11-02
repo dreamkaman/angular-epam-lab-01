@@ -1,11 +1,11 @@
 <header>
-    <div class="left-wrapper">
+    <a class="left-wrapper" routerLink="/login">
         <img class="logo-angular" src="../../../assets/images/angular.png" alt="angular">
         <p>Welcome!</p>
-    </div>
+    </a>
 
 
-    <div class="right-wrapper" *ngIf="isLogined">
+    <div class="right-wrapper" *ngIf="isLogined|async">
         <div class="avatar-wrapper">
             <app-avatar> </app-avatar>
         </div>

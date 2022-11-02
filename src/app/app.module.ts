@@ -22,6 +22,7 @@ import { ContextMenuComponent } from './shared/context-menu/context-menu.compone
 import { StoreModule } from '@ngrx/store';
 import { loginReducer } from './features/login/login.reducer';
 import { NotFoundComponent } from './features/not-found/not-found.component';
+import { boardsReducer } from './features/dashboard/dashboard.reducer';
 
 
 @NgModule({
@@ -47,7 +48,7 @@ import { NotFoundComponent } from './features/not-found/not-found.component';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot({ login: loginReducer })
+    StoreModule.forRoot({ user: loginReducer, dashboard: boardsReducer })
   ],
   providers: [],
   bootstrap: [AppComponent]

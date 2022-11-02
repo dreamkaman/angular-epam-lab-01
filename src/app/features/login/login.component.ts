@@ -41,8 +41,8 @@ export class LoginComponent implements OnInit {
       this.http.post(this.URL, { email, password }).subscribe(
         {
           next: (responseData) => {
-            console.log(responseData);
-            console.log(this.store);
+            // console.log(responseData);
+            // console.log(this.store);
 
             this.loginForm.reset();
 
@@ -59,9 +59,6 @@ export class LoginComponent implements OnInit {
           }
         }
       );
-
-
-      console.log('isLogined after - ', this.isLogined);
 
       return
     }

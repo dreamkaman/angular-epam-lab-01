@@ -23,7 +23,10 @@
     </div>
 
     <ul class="boards-list">
-        <li>
+        <li *ngFor="let board of boards|async">
+            <app-board [id]="board._id" [boardName]="board.name" [creationDate]="board.creationDate"></app-board>
+        </li>
+        <!-- <li>
             <app-board></app-board>
         </li>
         <li>
@@ -64,10 +67,7 @@
         </li>
         <li>
             <app-board></app-board>
-        </li>
-        <li>
-            <app-board></app-board>
-        </li>
+        </li> -->
     </ul>
 
 </div>
