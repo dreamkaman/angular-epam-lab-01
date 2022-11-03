@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -6,6 +7,7 @@ import { clearBoards } from 'src/app/features/dashboard/dashboard.actions';
 import { selectToken } from 'src/app/features/dashboard/dashboard.selectors';
 import { clearToken } from 'src/app/features/login/login.actions';
 import { GlobalState } from 'src/store/models/login.model';
+import { getToken } from 'src/app/features/dashboard/dashboard.selectors';
 
 
 @Component({
@@ -16,9 +18,10 @@ import { GlobalState } from 'src/store/models/login.model';
 export class HeaderComponent implements OnInit {
   @Input() isLogined!: Observable<string | null>;
 
-  btnLogout: string = 'Log out';
 
-  constructor(private store: Store<GlobalState>, private router: Router) { }
+  URL = 'http://localhost:4000/api/users/logout';
+
+  constructor(private store: Store<GlobalState>, private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
 
@@ -27,12 +30,26 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogOut() {
-    console.log('Log out!');
+    const auth_token = getToken(this.store.select(selectToken));
 
-    this.store.dispatch(clearToken());
-    this.store.dispatch(clearBoards());
+    // console.log(auth_token);
 
-    this.router.navigateByUrl('/login');
+    this.http.get(this.URL, {
+      headers: {
+        "Authorization": `Bearer ${auth_token}`
+      }
+    }).subscribe({
+      next: () => {
+        this.store.dispatch(clearToken());
+        this.store.dispatch(clearBoards());
+
+        this.router.navigateByUrl('/login');
+
+      },
+      error: (err) => console.log(err)
+    })
+
+
   }
 
 }

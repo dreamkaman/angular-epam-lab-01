@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class BoardComponent implements OnInit {
   @Input() boardName: string = 'Board name';
   @Input() creationDate: string = 'Creation date';
+  @Input() description: string = 'Description';
 
   constructor() { }
 

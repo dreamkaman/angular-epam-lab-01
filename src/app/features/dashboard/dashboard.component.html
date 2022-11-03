@@ -19,55 +19,16 @@
     </div>
 
     <div class="add-button-wrapper">
-        <app-button text="ADD NEW BOARD"></app-button>
+        <app-button text="ADD NEW BOARD" (click)="onAddNewBoardClick()"></app-button>
     </div>
 
     <ul class="boards-list">
         <li *ngFor="let board of boards|async">
-            <app-board [id]="board._id" [boardName]="board.name" [creationDate]="board.creationDate"></app-board>
+            <a class="router-link" [routerLink]="[board._id,'details']" (click)="onRouterLinkClick(board.name)">
+                <app-board [id]="board._id" [boardName]="board.name" [creationDate]="board.creationDate"
+                    [description]="board.description"></app-board>
+            </a>
         </li>
-        <!-- <li>
-            <app-board></app-board>
-        </li>
-        <li>
-            <app-board></app-board>
-        </li>
-        <li>
-            <app-board></app-board>
-        </li>
-        <li>
-            <app-board></app-board>
-        </li>
-        <li>
-            <app-board></app-board>
-        </li>
-        <li>
-            <app-board></app-board>
-        </li>
-        <li>
-            <app-board></app-board>
-        </li>
-        <li>
-            <app-board></app-board>
-        </li>
-        <li>
-            <app-board></app-board>
-        </li>
-        <li>
-            <app-board></app-board>
-        </li>
-        <li>
-            <app-board></app-board>
-        </li>
-        <li>
-            <app-board></app-board>
-        </li>
-        <li>
-            <app-board></app-board>
-        </li>
-        <li>
-            <app-board></app-board>
-        </li> -->
     </ul>
 
 </div>

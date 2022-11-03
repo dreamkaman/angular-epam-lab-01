@@ -1,13 +1,16 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { GlobalState } from 'src/store/models/login.model';
 
-import * as boardActions from './dashboard.actions';
-import { BoardItem, BoardState } from './dashboard.reducer';
+
+import { BoardItem } from './dashboard.reducer';
 import { selectToken } from './dashboard.selectors';
+import { getToken } from './dashboard.selectors';
+import { DashboardService } from './dashboard.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -16,55 +19,38 @@ import { selectToken } from './dashboard.selectors';
 })
 
 
-
 export class DashboardComponent implements OnInit {
-  // @Input() boards: BoardItem[] = [];
   @Input() boards!: Observable<BoardItem[]>;
-  // @Input() boards!: Observable<Object>;
 
   URL = 'http://localhost:4000/api/boards';
 
-  // auth_token = "";
+  auth_token = getToken(this.store.select(selectToken));
 
-
-  constructor(private store: Store<GlobalState>, private http: HttpClient) { }
-
-  getToken(observable: Observable<string | null>) {
-    let value: string | null = null;
-    observable.subscribe(data => value = data);
-    return value
-  }
+  constructor(private store: Store<GlobalState>, private http: HttpClient, private dashBoardService: DashboardService) { }
 
   getAllBoards() {
-    // let boards: BoardItem[] = [];
-    const auth_token = this.getToken(this.store.select(selectToken));
+
 
     return this.http.get(this.URL, {
       headers: {
-        "Authorization": `Bearer ${auth_token}`
+        "Authorization": `Bearer ${this.auth_token}`
       }
     }) as Observable<BoardItem[]>
-
-    // console.log(auth_token);//sync method
-    // this.http.get(this.URL, {
-    //   headers: {
-    //     "Authorization": `Bearer ${auth_token}`
-    //   }
-    // }).subscribe(
-    //   {
-    //     next: responseData => {
-    //       console.log(responseData);
-
-    //       boards = responseData as BoardItem[];
-    //     }
-    //   });
-    // return boards;
   }
 
 
 
   ngOnInit(): void {
     this.boards = this.getAllBoards()
+  }
+
+  onRouterLinkClick(newName: string) {
+    this.dashBoardService.setBoardName(newName);
+  }
+
+
+  onAddNewBoardClick() {
+    console.log("Add new board btn click!");
   }
 
   clickHandler1() {

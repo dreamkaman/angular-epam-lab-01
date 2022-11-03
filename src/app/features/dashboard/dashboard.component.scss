@@ -15,6 +15,10 @@
   max-width: 120px;
 }
 
+.router-link {
+  color: inherit;
+}
+
 .boards-list {
   display: flex;
   flex-wrap: wrap;

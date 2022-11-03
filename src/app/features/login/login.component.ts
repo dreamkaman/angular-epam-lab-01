@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
   constructor(private http: HttpClient, private store: Store<GlobalState>, private router: Router) { }
 
   ngOnInit(): void {
+
   }
 
 
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
         {
           next: (responseData) => {
             // console.log(responseData);
-            // console.log(this.store);
+
 
             this.loginForm.reset();
 
@@ -50,13 +51,10 @@ export class LoginComponent implements OnInit {
 
             this.store.dispatch(addToken({ token }));
 
-            this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl('/boards');
 
           },
-          error: (err) => console.log(err.error.message),
-          complete: () => {
-            console.log('Finite la comedy!');
-          }
+          error: (err) => console.log(err.error.message)
         }
       );
 

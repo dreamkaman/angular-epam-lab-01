@@ -23,6 +23,8 @@ import { StoreModule } from '@ngrx/store';
 import { loginReducer } from './features/login/login.reducer';
 import { NotFoundComponent } from './features/not-found/not-found.component';
 import { boardsReducer } from './features/dashboard/dashboard.reducer';
+import { detailsReducer } from './features/details/details.reducer';
+import { ModalWindowComponent } from './shared/modal-window/modal-window.component';
 
 
 @NgModule({
@@ -41,14 +43,15 @@ import { boardsReducer } from './features/dashboard/dashboard.reducer';
     TasksListComponent,
     TaskComponent,
     ContextMenuComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ModalWindowComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot({ user: loginReducer, dashboard: boardsReducer })
+    StoreModule.forRoot({ user: loginReducer, dashboard: boardsReducer, details: detailsReducer })
   ],
   providers: [],
   bootstrap: [AppComponent]

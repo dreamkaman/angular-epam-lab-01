@@ -6,19 +6,8 @@
         </div>
 
         <ul class="list">
-            <li>
-                <app-task idTask="001"
-                    taskName="When you manage a team—especially one that's spread across multiple time zones—you have to keep many moving parts in check. Project specs, assigned tasks, due dates, and key milestones all call for a holistic approach to project management.">
-                </app-task>
-            </li>
-            <li>
-                <app-task idTask="002"
-                    taskName="When you manage a team—especially one that's spread across multiple time zones—you have to keep many moving parts in check. Project specs, assigned tasks, due dates, and key milestones all call for a holistic approach to project management.">
-                </app-task>
-            </li>
-            <li>
-                <app-task idTask="003"
-                    taskName="When you manage a team—especially one that's spread across multiple time zones—you have to keep many moving parts in check. Project specs, assigned tasks, due dates, and key milestones all call for a holistic approach to project management.">
+            <li *ngFor="let detail of details|async">
+                <app-task [idTask]="detail._id" [taskName]="detail.name">
                 </app-task>
             </li>
         </ul>

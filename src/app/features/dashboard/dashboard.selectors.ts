@@ -1,4 +1,5 @@
 import { createSelector } from "@ngrx/store";
+import { Observable } from "rxjs";
 import { GlobalState } from "src/store/models/login.model";
 
 //
@@ -15,3 +16,9 @@ export const selectBoards = createSelector(
     selectDashboard,
     (state: GlobalState['dashboard']) => state.boards
 );
+
+export function getToken(observable: Observable<string | null>) {
+    let value: string | null = null;
+    observable.subscribe(data => value = data);
+    return value
+}

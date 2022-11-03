@@ -1,6 +1,6 @@
 <div class="container">
     <div class="details-header">
-        <h3>{{'Board name'}}</h3>
+        <h3>{{boardName}}</h3>
         <ul class="buttons-list">
             <li>
                 <app-button (clickEmitter)="clickHandler1()" text="Filter"></app-button>
@@ -17,9 +17,9 @@
         </ul>
     </div>
     <div class="tasks-lists-wrapper">
-        <app-tasks-list blockTitle="Todo"></app-tasks-list>
-        <app-tasks-list blockTitle="In progress"></app-tasks-list>
-        <app-tasks-list blockTitle="Done"></app-tasks-list>
+        <app-tasks-list blockTitle="Todo" [details]="todoList"></app-tasks-list>
+        <app-tasks-list blockTitle="In progress" [details]="inProgressList"></app-tasks-list>
+        <app-tasks-list blockTitle="Done" [details]="doneList"></app-tasks-list>
     </div>
 
 

@@ -8,8 +8,8 @@ import { NotFoundComponent } from './features/not-found/not-found.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'details', component: DetailsComponent },
+  { path: 'boards', component: DashboardComponent },
+  { path: 'boards/:boardId/details', component: DetailsComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent }
 ];
