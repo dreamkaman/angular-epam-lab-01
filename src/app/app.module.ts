@@ -25,6 +25,11 @@ import { NotFoundComponent } from './features/not-found/not-found.component';
 import { boardsReducer } from './features/dashboard/dashboard.reducer';
 import { detailsReducer } from './features/details/details.reducer';
 import { ModalWindowComponent } from './shared/modal-window/modal-window.component';
+import { FormAddBoardComponent } from './shared/form-add-board/form-add-board.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+// import { EffectsModule } from '@ngrx/effects';
+// import { DashboardEffects } from '../app/features/dashboard/dashboard.effects';
 
 
 @NgModule({
@@ -44,14 +49,20 @@ import { ModalWindowComponent } from './shared/modal-window/modal-window.compone
     TaskComponent,
     ContextMenuComponent,
     NotFoundComponent,
-    ModalWindowComponent
+    ModalWindowComponent,
+    FormAddBoardComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot({ user: loginReducer, dashboard: boardsReducer, details: detailsReducer })
+    StoreModule.forRoot({ user: loginReducer, dashboard: boardsReducer, details: detailsReducer }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production
+    }),
+    // EffectsModule.forRoot([DashboardEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

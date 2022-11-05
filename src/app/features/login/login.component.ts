@@ -7,6 +7,8 @@ import { Router } from '@angular/router'
 import { addToken } from './login.actions';
 import { LoginService } from './login.service';
 import { GlobalState } from 'src/store/models/login.model';
+import { Observable } from 'rxjs';
+import { selectToken } from '../dashboard/dashboard.selectors';
 
 export interface Response {
   token: string,
@@ -24,12 +26,14 @@ export class LoginComponent implements OnInit {
   @ViewChild('f') loginForm!: NgForm;
   @Output() isLogined: boolean = false;
 
+  isVisible: boolean = true;
+
   URL: string = 'http://localhost:4000/api/auth/login';
 
   constructor(private http: HttpClient, private store: Store<GlobalState>, private router: Router) { }
 
   ngOnInit(): void {
-
+    this.store.select(selectToken).subscribe(isVisible => this.isVisible = !isVisible);
   }
 
 
@@ -61,7 +65,7 @@ export class LoginComponent implements OnInit {
       return
     }
 
-    alert('Please, input required values!');
+    alert('Please, input required values before submit!');
 
   }
 

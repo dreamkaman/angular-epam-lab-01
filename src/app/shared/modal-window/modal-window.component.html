@@ -1,12 +1,3 @@
-<div class="backdrop">
-    <form (ngSubmit)="onOkSubmit()" #f="ngForm">
-        <label for="email">E-mail</label>
-        <input type="email" name="email" autocomplete="false" required ngModel>
-        <label for="password">Password</label>
-        <input type="password" name="password" autocomplete="false" required ngModel>
-        <div class="btn-wrapper">
-            <app-button class="btn-item" text="Ok" btnType="Submit"></app-button>
-            <app-button class="btn-item" text="Close"></app-button>
-        </div>
-    </form>
+<div class="backdrop" *ngIf="isModalVisible$|async as isModalVisible" (click)="onBackdropClick($event)">
+    <app-form-add-board></app-form-add-board>
 </div>

@@ -30,7 +30,8 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogOut() {
-    const auth_token = getToken(this.store.select(selectToken));
+    // const auth_token = getToken(this.store.select(selectToken));
+    const auth_token = getToken(this.isLogined);
 
     // console.log(auth_token);
 

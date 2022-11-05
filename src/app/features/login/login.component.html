@@ -1,6 +1,6 @@
 <!-- <form #authForm="ngForm"> -->
 <div class="container">
-    <form (ngSubmit)="onLogin()" #f="ngForm">
+    <form (ngSubmit)="onLogin()" #f="ngForm" *ngIf="isVisible">
         <label for="email">E-mail</label>
         <input type="email" name="email" autocomplete="false" required ngModel>
         <label for="password">Password</label>

@@ -12,7 +12,9 @@ export interface BoardItem {
 };
 
 export type BoardState = {
-    boards: BoardItem[];
+
+    boards: BoardItem[]
+
 }
 
 
@@ -22,8 +24,13 @@ export const initialState: BoardState = {
 
 export const boardsReducer = createReducer<BoardState>(
     initialState,
-    on(boardActions.getAllBoards, (state, { boards }) => ({ ...state, boards: [...boards] })),
-    on(boardActions.deleteBoard, (state, { id }) => ({ ...state, boards: [...state.boards.filter((board) => board._id !== id)] })),
+    on(boardActions.getAllBoards, (_state, { boards }) => ({ boards: [...boards] })),
+    on(boardActions.addBoard, (state, { board }) => {
+        console.log(board);
+        console.log(state);
+        return { boards: [...state.boards, board] }
+    }),
+    on(boardActions.deleteBoard, (state, { id }) => ({ boards: [...state.boards.filter((board) => board._id !== id)] })),
     on(boardActions.patchBoard, (state, { id, name }) => {
         const foundIndex = state.boards.findIndex((board) => { board._id === id });
 
@@ -32,6 +39,6 @@ export const boardsReducer = createReducer<BoardState>(
         return { ...state }
     }
     ),
-    on(boardActions.clearBoards, (state) => ({ ...state, boards: [] }))
+    on(boardActions.clearBoards, (_state) => ({ boards: [] }))
 
 );

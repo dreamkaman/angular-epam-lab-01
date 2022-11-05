@@ -1,16 +1,14 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Input, Output, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-
-import { GlobalState } from 'src/store/models/login.model';
-
+import { ModalWindowService } from 'src/app/shared/modal-window/modal-window.service';
 
 import { BoardItem } from './dashboard.reducer';
-import { selectToken } from './dashboard.selectors';
-import { getToken } from './dashboard.selectors';
-import { DashboardService } from './dashboard.service';
+import { getToken, selectToken, selectBoards } from './dashboard.selectors';
 
+import { DashboardService } from './dashboard.service';
+import { GlobalState } from 'src/store/models/login.model';
+import * as dashboardActions from '../dashboard/dashboard.actions';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,30 +16,29 @@ import { DashboardService } from './dashboard.service';
   styleUrls: ['./dashboard.component.scss']
 })
 
-
 export class DashboardComponent implements OnInit {
-  @Input() boards!: Observable<BoardItem[]>;
-
-  URL = 'http://localhost:4000/api/boards';
+  @Input() boards: Observable<BoardItem[]> = this.store.select(selectBoards);
+  // boards: Observable<BoardItem[]> = this.store.select(selectBoards);
 
   auth_token = getToken(this.store.select(selectToken));
 
-  constructor(private store: Store<GlobalState>, private http: HttpClient, private dashBoardService: DashboardService) { }
 
-  getAllBoards() {
-
-
-    return this.http.get(this.URL, {
-      headers: {
-        "Authorization": `Bearer ${this.auth_token}`
-      }
-    }) as Observable<BoardItem[]>
-  }
-
+  constructor(private store: Store<GlobalState>,
+    private dashBoardService: DashboardService,
+    private modalWindowService: ModalWindowService) { }
 
 
   ngOnInit(): void {
-    this.boards = this.getAllBoards()
+    // this.auth_token = getToken(this.store.select(selectToken));
+
+    this.dashBoardService.getAllBoards(this.auth_token)
+      .subscribe({
+        next: responseData => {
+          const boards = responseData;
+          this.store.dispatch(dashboardActions.getAllBoards({ boards }));
+        },
+        error: err => console.log(err)
+      });
   }
 
   onRouterLinkClick(newName: string) {
@@ -51,6 +48,7 @@ export class DashboardComponent implements OnInit {
 
   onAddNewBoardClick() {
     console.log("Add new board btn click!");
+    this.modalWindowService.open();
   }
 
   clickHandler1() {
