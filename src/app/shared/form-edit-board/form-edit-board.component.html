@@ -1,0 +1,10 @@
+<form (ngSubmit)="onOkSubmit()" #f="ngForm">
+    <label for="nameBoard">New name of the board</label>
+    <input type="text" name="name" autocomplete="false" required ngModel>
+    <label for="description">New description (not required)</label>
+    <textarea rows="5" cols="1" name="description" ngModel></textarea>
+    <div class="btn-wrapper">
+        <app-button class="btn-item" text="Accept" btnType="Submit"></app-button>
+        <app-button class="btn-item" text="Close" (clickEmitter)="onCloseBtnClick()"></app-button>
+    </div>
+</form>

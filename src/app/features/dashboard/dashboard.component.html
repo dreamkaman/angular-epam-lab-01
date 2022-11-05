@@ -19,12 +19,13 @@
     </div>
 
     <div class="add-button-wrapper">
-        <app-button text="ADD NEW BOARD" (click)="onAddNewBoardClick()"></app-button>
+        <app-button text="ADD NEW BOARD" (click)="onAddNewBoardClick($event)"></app-button>
     </div>
 
     <ul class="boards-list">
-        <li *ngFor="let board of boards|async">
-            <a class="router-link" [routerLink]="[board._id,'details']" (click)="onRouterLinkClick(board.name)">
+        <li class="boards-list-item" *ngFor="let board of boards|async">
+            <app-buttons-block [boardId]="board._id"></app-buttons-block>
+            <a class="router-link" [routerLink]="[board._id,'details']" (click)="onRouterLinkClick($event, board.name)">
                 <app-board [id]="board._id" [boardName]="board.name" [creationDate]="board.creationDate"
                     [description]="board.description"></app-board>
             </a>

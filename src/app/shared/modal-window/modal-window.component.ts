@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ModalWindowService } from './modal-window.service';
@@ -12,6 +12,7 @@ export class ModalWindowComponent implements OnInit {
   @ViewChild('f') loginForm!: NgForm;
 
   isModalVisible$: Observable<boolean> = new Observable<false>;
+  isModalEditVisible$: Observable<boolean> = new Observable<false>;
 
   constructor(
     private modalWindowService: ModalWindowService
@@ -19,33 +20,26 @@ export class ModalWindowComponent implements OnInit {
 
   ngOnInit() {
 
-    this.isModalVisible$ = this.modalWindowService.watch();
+    this.isModalVisible$ = this.modalWindowService.watchAddBoard();
+
+    this.isModalEditVisible$ = this.modalWindowService.watchEditBoard();
   }
 
 
-  onOkSubmit() {
-    if (this.loginForm.valid) {
-      console.log('Click on Submit!');
-
-      this.modalWindowService.close();
-    }
-
-    alert('Please, input required values before submit!');
-  }
-
-
-  onBackdropClick(event: MouseEvent) {
+  onAddBoardBackdropClick(event: MouseEvent) {
 
     if (event.target == event.currentTarget) {
 
-      this.modalWindowService.close();
+      this.modalWindowService.closeAddBoard();
     }
 
   }
 
-  onCloseBtnClick() {
+  onEditBoardBackdropClick(event: MouseEvent) {
+    if (event.target == event.currentTarget) {
 
-    this.modalWindowService.close();
+      this.modalWindowService.closeEditBoard();
+    }
   }
 
 }

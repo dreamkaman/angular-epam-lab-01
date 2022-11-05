@@ -1,0 +1,28 @@
+.btn-block {
+  position: absolute;
+  z-index: 5;
+  bottom: 0;
+  right: 0;
+  padding: 5px;
+
+  display: flex;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 22px;
+  height: 22px;
+
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 1px 1px 2px 0px rgb(185, 185, 185);
+  cursor: pointer;
+}
+
+.btn + .btn {
+  margin-left: 4px;
+}

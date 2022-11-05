@@ -18,7 +18,6 @@ import * as dashboardActions from '../dashboard/dashboard.actions';
 
 export class DashboardComponent implements OnInit {
   @Input() boards: Observable<BoardItem[]> = this.store.select(selectBoards);
-  // boards: Observable<BoardItem[]> = this.store.select(selectBoards);
 
   auth_token = getToken(this.store.select(selectToken));
 
@@ -29,7 +28,6 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.auth_token = getToken(this.store.select(selectToken));
 
     this.dashBoardService.getAllBoards(this.auth_token)
       .subscribe({
@@ -41,14 +39,15 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  onRouterLinkClick(newName: string) {
+  onRouterLinkClick(event: Event, newName: string) {
+
     this.dashBoardService.setBoardName(newName);
+
   }
 
+  onAddNewBoardClick(event: Event) {
 
-  onAddNewBoardClick() {
-    console.log("Add new board btn click!");
-    this.modalWindowService.open();
+    this.modalWindowService.openAddBoard();
   }
 
   clickHandler1() {

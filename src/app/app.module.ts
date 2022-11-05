@@ -28,6 +28,8 @@ import { ModalWindowComponent } from './shared/modal-window/modal-window.compone
 import { FormAddBoardComponent } from './shared/form-add-board/form-add-board.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
+import { ButtonsBlockComponent } from './shared/buttons-block/buttons-block.component';
+import { FormEditBoardComponent } from './shared/form-edit-board/form-edit-board.component';
 // import { EffectsModule } from '@ngrx/effects';
 // import { DashboardEffects } from '../app/features/dashboard/dashboard.effects';
 
@@ -50,7 +52,9 @@ import { environment } from 'src/environments/environment';
     ContextMenuComponent,
     NotFoundComponent,
     ModalWindowComponent,
-    FormAddBoardComponent
+    FormAddBoardComponent,
+    ButtonsBlockComponent,
+    FormEditBoardComponent
   ],
   imports: [
     BrowserModule,

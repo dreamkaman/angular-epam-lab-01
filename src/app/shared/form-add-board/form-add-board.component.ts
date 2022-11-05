@@ -8,6 +8,7 @@ import { GlobalState } from 'src/store/models/login.model';
 import { ModalWindowService } from '../modal-window/modal-window.service';
 import * as dashboardActions from '../../features/dashboard/dashboard.actions';
 import { BoardItem } from 'src/app/features/dashboard/dashboard.reducer';
+import { IFormData } from 'src/app/features/dashboard/dashboard.service';
 
 @Component({
   selector: 'app-form-add-board',
@@ -16,9 +17,9 @@ import { BoardItem } from 'src/app/features/dashboard/dashboard.reducer';
 })
 
 export class FormAddBoardComponent implements OnInit {
-  @ViewChild('f') loginForm!: NgForm;
+  @ViewChild('f') addBoardForm!: NgForm;
 
-  auth_token = getToken(this.store.select(selectToken));
+  // auth_token = getToken(this.store.select(selectToken));
 
   constructor(
     private modalWindowService: ModalWindowService,
@@ -29,11 +30,11 @@ export class FormAddBoardComponent implements OnInit {
   }
 
   onOkSubmit(): void {
-    if (this.loginForm.valid) {
-      console.log('Click on Submit!');
-      console.log(this.auth_token);
+    if (this.addBoardForm.valid) {
 
-      this.dashBoardService.addBoard().subscribe({
+      const formData: IFormData = this.addBoardForm.value;
+
+      this.dashBoardService.addBoard(formData).subscribe({
         next: responseData => {
           console.log(responseData);
           const board: BoardItem = responseData as BoardItem;
@@ -42,7 +43,7 @@ export class FormAddBoardComponent implements OnInit {
         error: err => console.log(err)
       });
 
-      this.modalWindowService.close();
+      this.modalWindowService.closeAddBoard();
 
       return
     }
@@ -55,14 +56,14 @@ export class FormAddBoardComponent implements OnInit {
 
     if (event.target == event.currentTarget) {
 
-      this.modalWindowService.close();
+      this.modalWindowService.closeAddBoard();
     }
 
   }
 
   onCloseBtnClick() {
 
-    this.modalWindowService.close();
+    this.modalWindowService.closeAddBoard();
   }
 
 

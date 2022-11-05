@@ -1,0 +1,10 @@
+<div class="btn-block" [id]="boardId">
+    <button class="btn" type="button">
+        <img class="btn-img img-edit" src="../../../assets/images/pencil-144.png" alt="edit button"
+            (click)="onEditClick($event,boardId)">
+    </button>
+    <button class="btn" type="button">
+        <img class="btn-img img-delete" src="../../../assets/images/trash-144-red.png" alt="delete button"
+            (click)="onDeleteClick($event)">
+    </button>
+</div>

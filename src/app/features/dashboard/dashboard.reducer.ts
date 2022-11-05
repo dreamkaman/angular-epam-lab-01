@@ -26,17 +26,27 @@ export const boardsReducer = createReducer<BoardState>(
     initialState,
     on(boardActions.getAllBoards, (_state, { boards }) => ({ boards: [...boards] })),
     on(boardActions.addBoard, (state, { board }) => {
-        console.log(board);
-        console.log(state);
         return { boards: [...state.boards, board] }
     }),
     on(boardActions.deleteBoard, (state, { id }) => ({ boards: [...state.boards.filter((board) => board._id !== id)] })),
-    on(boardActions.patchBoard, (state, { id, name }) => {
-        const foundIndex = state.boards.findIndex((board) => { board._id === id });
+    on(boardActions.patchBoard, (state, { board }) => {
+        if (board.description) {
+            const newBoards = state.boards.map(oldBoard =>
+                oldBoard._id === board._id ? { ...oldBoard, name: board.name, description: board.description } : oldBoard
+            );
 
-        state.boards[foundIndex].name = name;
+            return { boards: newBoards };
+        }
 
-        return { ...state }
+        const newBoards = state.boards.map(oldBoard =>
+            oldBoard._id === board._id ? { ...oldBoard, name: board.name } : oldBoard
+        );
+
+        return { boards: newBoards };
+
+
+
+
     }
     ),
     on(boardActions.clearBoards, (_state) => ({ boards: [] }))

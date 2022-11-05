@@ -1,3 +1,7 @@
-<div class="backdrop" *ngIf="isModalVisible$|async as isModalVisible" (click)="onBackdropClick($event)">
+<div class="backdrop" *ngIf="isModalVisible$|async as isModalVisible" (click)="onAddBoardBackdropClick($event)">
     <app-form-add-board></app-form-add-board>
+</div>
+<div class="backdrop" *ngIf="isModalEditVisible$|async as isModalEditVisible"
+    (click)="onEditBoardBackdropClick($event)">
+    <app-form-edit-board></app-form-edit-board>
 </div>
