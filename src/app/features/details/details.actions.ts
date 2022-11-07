@@ -8,5 +8,5 @@ const DELETE_DETAIL = 'DELETE_DETAIL';
 
 export const getDetails = createAction(GET_DETAILS, props<{ detailsAll: DetailsItem[] }>());
 export const addDetail = createAction(ADD_DETAIL, props<{ detail: DetailsItem }>());
-export const deleteDetail = createAction(DELETE_DETAIL, props<{ detailId: string }>());
+export const deleteDetail = createAction(DELETE_DETAIL, props<{ detail: DetailsItem }>());
 

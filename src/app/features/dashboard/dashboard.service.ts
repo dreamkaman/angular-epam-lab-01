@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+
 import { GlobalState } from 'src/store/models/login.model';
-import { deleteBoard } from './dashboard.actions';
 import { BoardItem } from './dashboard.reducer';
 import { getToken, selectToken } from './dashboard.selectors';
 
@@ -16,7 +16,6 @@ export interface IFormData {
   providedIn: 'root'
 })
 export class DashboardService {
-  // boardId: string = '';
 
   boardName: string = '';
 
@@ -82,7 +81,6 @@ export class DashboardService {
 
     return this.http.patch(
       editURL,
-      // { name, description },
       formData,
       {
         headers: {

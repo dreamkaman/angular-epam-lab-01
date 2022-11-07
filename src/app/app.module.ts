@@ -30,6 +30,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { ButtonsBlockComponent } from './shared/buttons-block/buttons-block.component';
 import { FormEditBoardComponent } from './shared/form-edit-board/form-edit-board.component';
+import { FormAddDetailsComponent } from './shared/form-add-details/form-add-details.component';
 // import { EffectsModule } from '@ngrx/effects';
 // import { DashboardEffects } from '../app/features/dashboard/dashboard.effects';
 
@@ -54,7 +55,8 @@ import { FormEditBoardComponent } from './shared/form-edit-board/form-edit-board
     ModalWindowComponent,
     FormAddBoardComponent,
     ButtonsBlockComponent,
-    FormEditBoardComponent
+    FormEditBoardComponent,
+    FormAddDetailsComponent
   ],
   imports: [
     BrowserModule,

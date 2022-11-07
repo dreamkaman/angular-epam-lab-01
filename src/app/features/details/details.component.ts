@@ -11,6 +11,7 @@ import * as detailsSelector from './details.selectors';
 import { getToken, selectToken } from '../dashboard/dashboard.selectors';
 import { GlobalState } from 'src/store/models/login.model';
 import { DashboardService } from '../dashboard/dashboard.service';
+import { DetailsService } from './details.service';
 
 
 @Component({
@@ -26,19 +27,27 @@ export class DetailsComponent implements OnInit {
 
   boardName: string = '';
 
-  routeSub: Subscription = new Subscription;
+  // routeSub: Subscription = new Subscription;
 
   URL = 'http://localhost:4000/api' + this.router.url;
 
   boardId: string = '';
 
-  constructor(private route: ActivatedRoute, private store: Store<GlobalState>, private http: HttpClient, private router: Router, private dashBoardService: DashboardService) { }
+  auth_token = getToken(this.store.select(selectToken));
 
-  getBoardId() {
-    this.routeSub = this.route.params.subscribe(params => {
-      this.boardId = params['boardId'];
-    });
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private store: Store<GlobalState>,
+    private http: HttpClient,
+    private router: Router,
+    private dashBoardService: DashboardService,
+    private detailsService: DetailsService) { }
+
+  // getBoardId() {
+  //   this.routeSub = this.route.params.subscribe(params => {
+  //     this.boardId = params['boardId'];
+  //   });
+  // }
 
   ngOnInit(): void {
     this.boardName = this.dashBoardService.getBoardName();
@@ -47,27 +56,18 @@ export class DetailsComponent implements OnInit {
 
     let detailsAll: DetailsItem[] = [];
 
-    this.http.get(this.URL, {
-      headers: {
-        "Authorization": `Bearer ${auth_token}`
-      }
-    }).subscribe({
-      next: details => {
-        detailsAll = details as DetailsItem[];
+    this.detailsService.getAllDetails(auth_token, this.URL)
+      .subscribe({
+        next: details => {
+          detailsAll = details;
+          this.store.dispatch(detailsActions.getDetails({ detailsAll }));
 
-        this.store.dispatch(detailsActions.getDetails({ detailsAll }));
-
-        this.todoList = this.store.select(detailsSelector.selectDetailsTodo);
-        this.inProgressList = this.store.select(detailsSelector.selectDetailsInProgress);
-        this.doneList = this.store.select(detailsSelector.selectDetailsDone);
-
-      },
-      error: err => console.log(err)
-    });
-
-
-
-
+          this.todoList = this.store.select(detailsSelector.selectDetailsTodo);
+          this.inProgressList = this.store.select(detailsSelector.selectDetailsInProgress);
+          this.doneList = this.store.select(detailsSelector.selectDetailsDone);
+        },
+        error: err => console.log(err)
+      });
   }
 
   clickHandler1() {

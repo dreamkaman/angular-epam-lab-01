@@ -1,8 +1,8 @@
 <form (ngSubmit)="onOkSubmit()" #f="ngForm">
-    <label for="name">Name of the board</label>
-    <input type="text" name="name" autocomplete="false" required ngModel>
-    <label for="description">Description</label>
-    <textarea rows="5" cols="1" name="description" required ngModel></textarea>
+    <!-- <label for="name">Task name</label>
+    <input type="text" name="name" autocomplete="false" required ngModel> -->
+    <label for="name">Task details</label>
+    <textarea rows="5" cols="1" name="name" required ngModel></textarea>
     <div class="btn-wrapper">
         <app-button class="btn-item" text="Add" btnType="Submit"></app-button>
         <app-button class="btn-item" text="Close" (clickEmitter)="onCloseBtnClick()"></app-button>

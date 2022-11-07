@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ModalWindowService } from 'src/app/shared/modal-window/modal-window.service';
@@ -16,7 +16,8 @@ import * as dashboardActions from '../dashboard/dashboard.actions';
   styleUrls: ['./dashboard.component.scss']
 })
 
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements
+  OnInit {
   @Input() boards: Observable<BoardItem[]> = this.store.select(selectBoards);
 
   auth_token = getToken(this.store.select(selectToken));
@@ -38,6 +39,8 @@ export class DashboardComponent implements OnInit {
         error: err => console.log(err)
       });
   }
+
+
 
   onRouterLinkClick(event: Event, newName: string) {
 

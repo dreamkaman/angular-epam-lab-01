@@ -3,17 +3,12 @@ import * as detailsActions from './details.actions';
 import { createReducer, on } from '@ngrx/store';
 //import * as boardActions from './dashboard.actions';
 
-enum Status {
-    "in progress",
-    "todo",
-    "done"
-}
 
 export interface DetailsItem {
     _id: string,
     boardId: string,
     name: string,
-    status: string
+    status: 'todo' | 'in progress' | 'done'
 };
 
 
@@ -33,10 +28,29 @@ export const initialState: DetailState = {
 export const detailsReducer = createReducer(
     initialState,
     on(detailsActions.getDetails, (_state, { detailsAll }) => {
-        const todo: DetailsItem[] = detailsAll.filter(item => item.status === "todo");
-        const inProgress: DetailsItem[] = detailsAll.filter(item => item.status === "in progress");
-        const done: DetailsItem[] = detailsAll.filter(item => item.status === "done");
+        const todo: DetailsItem[] = detailsAll.filter(item => item.status === 'todo');
+        const inProgress: DetailsItem[] = detailsAll.filter(item => item.status === 'in progress');
+        const done: DetailsItem[] = detailsAll.filter(item => item.status === 'done');
 
         return { todo, inProgress, done };
+    }),
+    on(detailsActions.addDetail, (state, { detail }) => {
+        const { status } = detail;
+        // let newState: DetailsItem;
+        switch (status) {
+            case 'todo': return { ...state, todo: [...state.todo, detail] };
+            case 'in progress': return { ...state, inProgress: [...state.inProgress, detail] };
+            case 'done': return { ...state, done: [...state.done, detail] };
+            default: return { ...state };
+        }
+    }),
+    on(detailsActions.deleteDetail, (state, { detail }) => {
+        const { status, _id } = detail;
+        switch (status) {
+            case 'todo': return { ...state, todo: state.todo.filter(item => item._id !== _id) };
+            case 'in progress': return { ...state, inProgress: state.inProgress.filter(item => item._id !== _id) };
+            case 'done': return { ...state, done: state.done.filter(item => item._id !== _id) };
+            default: return { ...state };
+        }
     })
 );

@@ -11,8 +11,10 @@ import { ModalWindowService } from './modal-window.service';
 export class ModalWindowComponent implements OnInit {
   @ViewChild('f') loginForm!: NgForm;
 
-  isModalVisible$: Observable<boolean> = new Observable<false>;
-  isModalEditVisible$: Observable<boolean> = new Observable<false>;
+  isAddBoardModalVisible$: Observable<boolean> = new Observable<false>;
+  isEditBoardModalVisible$: Observable<boolean> = new Observable<false>;
+  isAddDetailModalVisible$: Observable<boolean> = new Observable<false>;
+
 
   constructor(
     private modalWindowService: ModalWindowService
@@ -20,9 +22,11 @@ export class ModalWindowComponent implements OnInit {
 
   ngOnInit() {
 
-    this.isModalVisible$ = this.modalWindowService.watchAddBoard();
+    this.isAddBoardModalVisible$ = this.modalWindowService.watchAddBoard();
 
-    this.isModalEditVisible$ = this.modalWindowService.watchEditBoard();
+    this.isEditBoardModalVisible$ = this.modalWindowService.watchEditBoard();
+
+    this.isAddDetailModalVisible$ = this.modalWindowService.watchAddDetail();
   }
 
 
@@ -39,6 +43,13 @@ export class ModalWindowComponent implements OnInit {
     if (event.target == event.currentTarget) {
 
       this.modalWindowService.closeEditBoard();
+    }
+  }
+
+  onAddDetailBackdropClick(event: MouseEvent) {
+    if (event.target == event.currentTarget) {
+
+      this.modalWindowService.closeAddDetail();
     }
   }
 

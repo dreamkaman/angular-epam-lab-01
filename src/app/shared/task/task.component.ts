@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TaskService } from './task.service';
 
 @Component({
   selector: 'app-task',
@@ -9,9 +10,12 @@ export class TaskComponent implements OnInit {
   @Input() taskName: string = '';
   @Input() idTask: string = '';
 
-  constructor() { }
+  constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
+    console.log(this.idTask);
+
+    this.taskService.setIdTask(this.idTask);
   }
 
 }

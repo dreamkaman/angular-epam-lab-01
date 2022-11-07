@@ -32,12 +32,10 @@ export class FormEditBoardComponent implements OnInit {
 
       const formData: IFormData = this.editBoardForm.value;
       const boardId = this.formEditBoardService.getBoardId();
-      console.log(formData);
 
 
       this.dashBoardService.patchBoard(boardId, formData).subscribe({
         next: responseData => {
-          console.log();
           const board: BoardItem = responseData;
           this.store.dispatch(dashboardActions.patchBoard({ board }));
         },
