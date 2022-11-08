@@ -36,7 +36,6 @@ export class FormAddBoardComponent implements OnInit {
 
       this.dashBoardService.addBoard(formData).subscribe({
         next: responseData => {
-          console.log(responseData);
           const board: BoardItem = responseData as BoardItem;
           this.store.dispatch(dashboardActions.addBoard({ board }));
         },

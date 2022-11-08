@@ -13,8 +13,6 @@ export class TaskComponent implements OnInit {
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
-    console.log(this.idTask);
-
     this.taskService.setIdTask(this.idTask);
   }
 

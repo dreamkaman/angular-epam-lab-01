@@ -61,12 +61,19 @@ export class DashboardComponent implements
     console.log("Hello2!");
   }
 
-  clickHandler3() {
-    console.log("Hello3!");
+  onAscSortingByName() {
+    this.store.dispatch(dashboardActions.ascSortingByName());
   }
 
-  clickHandler4() {
-    console.log("Hello4!");
+  onDscSortingByName() {
+    this.store.dispatch(dashboardActions.dscSortingByName());
   }
 
+  onAscSortingByDate() {
+    this.store.dispatch(dashboardActions.ascSortingByDate());
+  }
+
+  onDscSortingByDate() {
+    this.store.dispatch(dashboardActions.dscSortingByName());
+  }
 }

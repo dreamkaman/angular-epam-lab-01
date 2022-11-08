@@ -12,6 +12,7 @@ import { getToken, selectToken } from '../dashboard/dashboard.selectors';
 import { GlobalState } from 'src/store/models/login.model';
 import { DashboardService } from '../dashboard/dashboard.service';
 import { DetailsService } from './details.service';
+import * as dashboardActions from '../dashboard/dashboard.actions';
 
 
 @Component({
@@ -70,19 +71,19 @@ export class DetailsComponent implements OnInit {
       });
   }
 
-  clickHandler1() {
+  onFilterBtnClick() {
     console.log("Hello1 in details!");
   }
 
-  clickHandler2() {
+  onSortBtnClick() {
     console.log("Hello2 in details!");
   }
 
-  clickHandler3() {
+  onAscBtnClick() {
     console.log("Hello3 in details!");
   }
 
-  clickHandler4() {
+  onDscBtnClick() {
     console.log("Hello4 in details!");
   }
 

@@ -52,5 +52,24 @@ export const detailsReducer = createReducer(
             case 'done': return { ...state, done: state.done.filter(item => item._id !== _id) };
             default: return { ...state };
         }
-    })
+    }),
+    on(detailsActions.changeStatus, (state, { detail, newStatus }) => {
+        console.log(state);
+        return { ...state };
+        // switch (newStatus) {
+        //     case 'todo': return {
+        //         ...state,
+        //         todo: state.todo.map(item => item = item._id === detail._id ? { ...item, status: newStatus } : item)
+        //     };
+        //     case 'in progress': return {
+        //         ...state,
+        //         inProgress: state.inProgress.map(item => item = item._id === detail._id ? { ...item, status: newStatus } : item)
+        //     };
+        //     case 'done': return {
+        //         ...state,
+        //         done: state.done.map(item => item = item._id === detail._id ? { ...item, status: newStatus } : item)
+        //     };
+        // }
+    }),
+    on(detailsActions.clearDetails, (_state) => ({ todo: [], inProgress: [], done: [] }))
 );

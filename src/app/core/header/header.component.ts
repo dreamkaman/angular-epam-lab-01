@@ -8,7 +8,7 @@ import { selectToken } from 'src/app/features/dashboard/dashboard.selectors';
 import { clearToken } from 'src/app/features/login/login.actions';
 import { GlobalState } from 'src/store/models/login.model';
 import { getToken } from 'src/app/features/dashboard/dashboard.selectors';
-
+import { clearDetails } from 'src/app/features/details/details.actions';
 
 @Component({
   selector: 'app-header',
@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
       next: () => {
         this.store.dispatch(clearToken());
         this.store.dispatch(clearBoards());
-
+        this.store.dispatch(clearDetails());
         this.router.navigateByUrl('/login');
 
       },

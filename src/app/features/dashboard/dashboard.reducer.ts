@@ -49,6 +49,26 @@ export const boardsReducer = createReducer<BoardState>(
 
     }
     ),
+    on(boardActions.ascSortingByName, (state) => {
+        const sortedBoards = [...state.boards];
+        sortedBoards.sort((a, b) => a.name.localeCompare(b.name));
+        return { boards: sortedBoards };
+    }),
+    on(boardActions.dscSortingByName, (state) => {
+        const sortedBoards = [...state.boards];
+        sortedBoards.sort((a, b) => b.name.localeCompare(a.name));
+        return { boards: sortedBoards };
+    }),
+    on(boardActions.ascSortingByDate, (state) => {
+        const sortedBoards = [...state.boards];
+        sortedBoards.sort((a, b) => (new Date(a.creationDate)).getTime() - (new Date(b.creationDate)).getTime());
+        return { boards: sortedBoards };
+    }),
+    on(boardActions.dscSortingByDate, (state) => {
+        const sortedBoards = [...state.boards];
+        sortedBoards.sort((a, b) => (new Date(b.creationDate)).getTime() - (new Date(a.creationDate)).getTime());
+        return { boards: sortedBoards };
+    }),
     on(boardActions.clearBoards, (_state) => ({ boards: [] }))
 
 );

@@ -31,21 +31,16 @@ export class ContextMenuComponent implements OnInit {
 
   onEdit = (event: Event) => {
     this.isVisible = false;
-
-    console.log('Edit button was pushed!');
-    console.log(this.idTask);
   }
 
   onDelete = (event: Event) => {
     const auth_token = dashboardSelectors.getToken(this.store.select(dashboardSelectors.selectToken));
     const delURL = 'http://localhost:4000/api' + this.router.url + '/' + this.idTask;
-    console.log(delURL);
 
     this.isVisible = false;
     this.detailsService.deleteDetail(auth_token, delURL)
       .subscribe({
         next: detail => {
-          console.log(detail);
 
           this.store.dispatch(detailsAction.deleteDetail({ detail }));
 
@@ -53,8 +48,6 @@ export class ContextMenuComponent implements OnInit {
         error: err => console.log(err)
       });
 
-    console.log('Delete button was pushed!');
-    console.log(this.idTask);
   }
 
 }

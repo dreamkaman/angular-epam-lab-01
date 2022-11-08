@@ -3,16 +3,16 @@
         <h3>{{boardName}}</h3>
         <ul class="buttons-list">
             <li>
-                <app-button (clickEmitter)="clickHandler1()" text="Filter"></app-button>
+                <app-button (clickEmitter)="onFilterBtnClick()" text="Filter"></app-button>
             </li>
             <li>
-                <app-button (clickEmitter)="clickHandler2()" text="Sort By Dropdown"></app-button>
+                <app-button (clickEmitter)="onSortBtnClick()" text="Sort by dropdown"></app-button>
             </li>
             <li>
-                <app-button (clickEmitter)="clickHandler3()" text="ASC"></app-button>
+                <app-button (clickEmitter)="onAscBtnClick()" text="ASC"></app-button>
             </li>
             <li>
-                <app-button (clickEmitter)="clickHandler4()" text="DESC"></app-button>
+                <app-button (clickEmitter)="onDscBtnClick()" text="DESC"></app-button>
             </li>
         </ul>
     </div>
