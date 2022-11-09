@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class TaskService {
   idTask: string = '';
+
+  destination: string = '';
+
   constructor() { }
 
   getIdTask() {
@@ -13,5 +16,13 @@ export class TaskService {
 
   setIdTask(newIdTask: string) {
     this.idTask = newIdTask;
+  }
+
+  getDestination() {
+    return this.destination;
+  }
+
+  setDestination(newDestination: string) {
+    this.destination = newDestination;
   }
 }

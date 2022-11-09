@@ -10,6 +10,8 @@ export class TaskComponent implements OnInit {
   @Input() taskName: string = '';
   @Input() idTask: string = '';
 
+  destination: string = '';
+
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {

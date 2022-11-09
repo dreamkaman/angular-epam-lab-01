@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, fromEvent, throttle, throttleTime, debounceTime, distinctUntilChanged, last, first } from 'rxjs';
 import { DetailsItem } from 'src/app/features/details/details.reducer';
@@ -9,6 +9,7 @@ import * as detailsActions from '../../features/details/details.actions';
 import { DetailsService } from 'src/app/features/details/details.service';
 import * as dashboardSelectors from '../../features/dashboard/dashboard.selectors';
 import { Router } from '@angular/router';
+import { TaskService } from '../task/task.service';
 
 @Component({
   selector: 'app-tasks-list',
@@ -19,17 +20,16 @@ export class TasksListComponent implements OnInit {
   @Input() blockTitle: string = '';
   @Input() details!: Observable<DetailsItem[]>;
 
-  state!: string;
-
   status!: Status;
-  draggingDetail!: DetailsItem;
-  obsBlockTitle$!: Observable<Event>;
+  draggingDetail!: string;
+  blockTitle$!: Observable<Event>;
 
   BASE_URL = 'http://localhost:4000/api';
 
   constructor(
     private modalWindowService: ModalWindowService,
     private tasksListService: TasksListService,
+    private taskService: TaskService,
     private detailListService: DetailsService,
     private store: Store<GlobalState>,
     private router: Router
@@ -38,9 +38,10 @@ export class TasksListComponent implements OnInit {
   ngOnInit(): void {
     // document.addEventListener('dragover', () => { return this.blockTitle });
 
-    this.obsBlockTitle$ = fromEvent(document, 'dragover');
+    this.blockTitle$ = fromEvent(document, 'dragenter');
 
   }
+
 
   onAddDetailClick(blockTitle: string) {
     console.log("Click on plus button!");
@@ -57,17 +58,16 @@ export class TasksListComponent implements OnInit {
     this.modalWindowService.openAddDetail();
   }
 
-  onDragStartHandle(draggingDetail: DetailsItem) {
-    // this.draggingDetail = draggingDetail;
-    // console.log(draggingDetail.status);
+  onDragStartHandle(event: DragEvent, detailId: string) {
+    console.log('onDragStartHandle - ', event);
+    this.draggingDetail = detailId;
   }
 
-  onDragOverHandle(blockTitle: string) {
-
-    // // console.log(this.blockTitle);
+  onDragOverHandle(event: DragEvent) {
+    // console.log('onDragOverHandle - ', event);
     // const auth_token = dashboardSelectors.getToken(this.store.select(dashboardSelectors.selectToken));
     // const patchURL = this.BASE_URL + this.router.url + '/' + this.draggingDetail?._id;
-    this.obsBlockTitle$
+    this.blockTitle$
       .pipe(
         throttleTime(1000),
         last()
@@ -103,13 +103,41 @@ export class TasksListComponent implements OnInit {
 
   }
 
-  onDragEnter(blockTitle: string) {
+  onDragEnter(event: DragEvent, blockTitle: string) {
     console.log('onDragEnter works! - ', blockTitle);
+    this.taskService.setDestination(blockTitle);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   }
 
-  onDragEnd(blockTitleKu: string) {
-    console.log('Dragend works!');
+  onDragEnd(event: DragEvent) {
+    console.log('Dragend works! - ', event);
+    // console.log(this.taskService.getDestination());
+    console.log(this.draggingDetail);
+
+    const auth_token = dashboardSelectors.getToken(this.store.select(dashboardSelectors.selectToken));
+    const patchURL = this.BASE_URL + this.router.url + '/' + this.draggingDetail;
+
+    let newStatus: Status = 'todo';
+    switch (this.taskService.getDestination()) {
+      case 'Todo': newStatus = 'todo'; break;
+      case 'In progress': newStatus = 'in progress'; break;
+      case 'Done': newStatus = 'done'; break;
+      default: console.log('Bad parameter');
+    }
+
+    this.detailListService.patchDetailStatus(auth_token, patchURL, newStatus).subscribe({
+      next: detail => {
+        console.log(detail);
+        // this.store.dispatch(detailsActions.getDetails({ detailsAll }));
+
+        // this.todoList = this.store.select(detailsSelector.selectDetailsTodo);
+        // this.inProgressList = this.store.select(detailsSelector.selectDetailsInProgress);
+        // this.doneList = this.store.select(detailsSelector.selectDetailsDone);
+      },
+      error: err => console.log(err)
+    });
   }
+
+
 
 }
 

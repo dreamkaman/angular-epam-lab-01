@@ -1,12 +1,14 @@
 <div class="block-task">
     <h3 class="block-title">{{blockTitle}}</h3>
-    <div class="wrapper" (dragend)="onDragEnd(blockTitle)" (dragenter)="onDragEnter(blockTitle)">
+    <div class="wrapper">
         <div class="button-wrapper">
             <app-button text="+" (clickEmitter)="onAddDetailClick(blockTitle)"></app-button>
         </div>
 
-        <ul id="drop_zone" class="list" (dragover)="onDragOverHandle(blockTitle)">
-            <li №dap *ngFor="let detail of details|async" draggable="true" (dragstart)="onDragStartHandle(detail)">
+        <ul id="drop_zone" class="list" (dragover)="onDragOverHandle($event)" (dragend)="onDragEnd($event)"
+            (dragenter)="onDragEnter($event, blockTitle)">
+            <li *ngFor="let detail of details|async" draggable="true"
+                (dragstart)="onDragStartHandle($event, detail._id)">
                 <app-task [idTask]="detail._id" [taskName]="detail.name">
                 </app-task>
             </li>
