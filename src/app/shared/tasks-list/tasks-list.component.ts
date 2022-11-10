@@ -21,7 +21,7 @@ export class TasksListComponent implements OnInit {
   @Input() details!: Observable<DetailsItem[]>;
 
   status!: Status;
-  draggingDetail!: string;
+
   blockTitle$!: Observable<Event>;
 
   BASE_URL = 'http://localhost:4000/api';
@@ -30,7 +30,7 @@ export class TasksListComponent implements OnInit {
     private modalWindowService: ModalWindowService,
     private tasksListService: TasksListService,
     private taskService: TaskService,
-    private detailListService: DetailsService,
+    private detailsService: DetailsService,
     private store: Store<GlobalState>,
     private router: Router
   ) { }
@@ -58,24 +58,24 @@ export class TasksListComponent implements OnInit {
     this.modalWindowService.openAddDetail();
   }
 
-  onDragStartHandle(event: DragEvent, detailId: string) {
-    console.log('onDragStartHandle - ', event);
-    this.draggingDetail = detailId;
+  onDragStartHandle(event: DragEvent, detail: DetailsItem) {
+    console.log('onDragStartHandle - ', detail);
+    this.tasksListService.setDraggingDetail(detail);
   }
 
   onDragOverHandle(event: DragEvent) {
     // console.log('onDragOverHandle - ', event);
     // const auth_token = dashboardSelectors.getToken(this.store.select(dashboardSelectors.selectToken));
     // const patchURL = this.BASE_URL + this.router.url + '/' + this.draggingDetail?._id;
-    this.blockTitle$
-      .pipe(
-        throttleTime(1000),
-        last()
-      )
-      .subscribe((value) => {
-        console.log(value);
-      }
-      );
+    // this.blockTitle$
+    //   .pipe(
+    //     throttleTime(1000),
+    //     last()
+    //   )
+    //   .subscribe((value) => {
+    //     console.log(value);
+    //   }
+    //   );
 
     // let newStatus: Status = 'todo';
     // switch (this.blockTitle) {
@@ -108,34 +108,30 @@ export class TasksListComponent implements OnInit {
     this.taskService.setDestination(blockTitle);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   }
 
-  onDragEnd(event: DragEvent) {
-    console.log('Dragend works! - ', event);
-    // console.log(this.taskService.getDestination());
-    console.log(this.draggingDetail);
+  // onDragEnd(event: DragEvent) {
+  //   const auth_token = dashboardSelectors.getToken(this.store.select(dashboardSelectors.selectToken));
+  //   const patchURL = this.BASE_URL + this.router.url + '/' + this.tasksListService.getDraggingDetail()._id;
 
-    const auth_token = dashboardSelectors.getToken(this.store.select(dashboardSelectors.selectToken));
-    const patchURL = this.BASE_URL + this.router.url + '/' + this.draggingDetail;
+  //   let newStatus: Status = 'todo';
+  //   switch (this.taskService.getDestination()) {
+  //     case 'Todo': newStatus = 'todo'; break;
+  //     case 'In progress': newStatus = 'in progress'; break;
+  //     case 'Done': newStatus = 'done'; break;
+  //     default: console.log('Bad parameter');
+  //   }
 
-    let newStatus: Status = 'todo';
-    switch (this.taskService.getDestination()) {
-      case 'Todo': newStatus = 'todo'; break;
-      case 'In progress': newStatus = 'in progress'; break;
-      case 'Done': newStatus = 'done'; break;
-      default: console.log('Bad parameter');
-    }
+  //   this.detailsService.patchDetailStatus(auth_token, patchURL, newStatus).subscribe({
+  //     next: responseData => {
+  //       console.log('Http response - ', responseData);
+  //       // this.store.dispatch(detailsActions.getDetails({ detailsAll }));
 
-    this.detailListService.patchDetailStatus(auth_token, patchURL, newStatus).subscribe({
-      next: detail => {
-        console.log(detail);
-        // this.store.dispatch(detailsActions.getDetails({ detailsAll }));
-
-        // this.todoList = this.store.select(detailsSelector.selectDetailsTodo);
-        // this.inProgressList = this.store.select(detailsSelector.selectDetailsInProgress);
-        // this.doneList = this.store.select(detailsSelector.selectDetailsDone);
-      },
-      error: err => console.log(err)
-    });
-  }
+  //       // this.todoList = this.store.select(detailsSelector.selectDetailsTodo);
+  //       // this.inProgressList = this.store.select(detailsSelector.selectDetailsInProgress);
+  //       // this.doneList = this.store.select(detailsSelector.selectDetailsDone);
+  //     },
+  //     error: err => console.log(err)
+  //   });
+  // }
 
 
 

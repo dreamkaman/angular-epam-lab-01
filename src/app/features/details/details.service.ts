@@ -51,6 +51,7 @@ export class DetailsService {
   }
 
   patchDetailStatus(auth_token: string | null, URL: string, newStatus: Status): Observable<DetailsItem> {
+    console.log('service -', URL);
     return this.http.patch(
       URL,
       { status: newStatus },

@@ -12,7 +12,9 @@ import { getToken, selectToken } from '../dashboard/dashboard.selectors';
 import { GlobalState } from 'src/store/models/login.model';
 import { DashboardService } from '../dashboard/dashboard.service';
 import { DetailsService } from './details.service';
-import * as dashboardActions from '../dashboard/dashboard.actions';
+import * as dashboardSelectors from '../dashboard/dashboard.selectors';
+import { Status, TasksListService } from 'src/app/shared/tasks-list/tasks-list.service';
+import { TaskService } from 'src/app/shared/task/task.service';
 
 
 @Component({
@@ -30,7 +32,7 @@ export class DetailsComponent implements OnInit {
 
   // routeSub: Subscription = new Subscription;
 
-  URL = 'http://localhost:4000/api' + this.router.url;
+  BASE_URL = 'http://localhost:4000/api';
 
   boardId: string = '';
 
@@ -42,7 +44,9 @@ export class DetailsComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private dashBoardService: DashboardService,
-    private detailsService: DetailsService) { }
+    private detailsService: DetailsService,
+    private taskService: TaskService,
+    private taskListService: TasksListService) { }
 
   // getBoardId() {
   //   this.routeSub = this.route.params.subscribe(params => {
@@ -57,7 +61,7 @@ export class DetailsComponent implements OnInit {
 
     let detailsAll: DetailsItem[] = [];
 
-    this.detailsService.getAllDetails(auth_token, this.URL)
+    this.detailsService.getAllDetails(auth_token, this.BASE_URL + this.router.url)
       .subscribe({
         next: details => {
           detailsAll = details;
@@ -85,6 +89,32 @@ export class DetailsComponent implements OnInit {
 
   onDscBtnClick() {
     console.log("Hello4 in details!");
+  }
+
+  onDragEnd() {
+    console.log('I am working!!!!')
+
+    const auth_token = dashboardSelectors.getToken(this.store.select(dashboardSelectors.selectToken));
+    const patchURL = this.BASE_URL + this.router.url + '/' + this.taskListService.getDraggingDetail()._id;
+
+    let newStatus: Status = 'todo';
+    switch (this.taskService.getDestination()) {
+      case 'Todo': newStatus = 'todo'; break;
+      case 'In progress': newStatus = 'in progress'; break;
+      case 'Done': newStatus = 'done'; break;
+      default: console.log('Bad parameter');
+    }
+
+    this.detailsService.patchDetailStatus(auth_token, patchURL, newStatus).subscribe({
+      next: detail => {
+        this.store.dispatch(detailsActions.changeStatus({ detail, newStatus }))
+
+        this.todoList = this.store.select(detailsSelector.selectDetailsTodo);
+        this.inProgressList = this.store.select(detailsSelector.selectDetailsInProgress);
+        this.doneList = this.store.select(detailsSelector.selectDetailsDone);
+      },
+      error: err => console.log(err)
+    });
   }
 
 }

@@ -54,22 +54,24 @@ export const detailsReducer = createReducer(
         }
     }),
     on(detailsActions.changeStatus, (state, { detail, newStatus }) => {
-        console.log(state);
+        let newState!: DetailState;
+        //Delete task from old place
+        if (detail.status !== newStatus) {
+            //Delete task from old place
+            switch (detail.status) {
+                case 'todo': newState = { ...state, todo: state.todo.filter(item => item._id !== detail._id) }; break;
+                case 'in progress': newState = { ...state, inProgress: state.inProgress.filter(item => item._id !== detail._id) }; break;
+                case 'done': newState = { ...state, done: state.done.filter(item => item._id !== detail._id) }; break;
+                default: console.log('Bad data!')
+            }
+            //Add task to the new place
+            switch (newStatus) {
+                case 'todo': return { ...newState, todo: [...newState.todo, { ...detail, status: newStatus }] };
+                case 'in progress': return { ...newState, inProgress: [...newState.inProgress, { ...detail, status: newStatus }] };
+                case 'done': return { ...newState, done: [...newState.done, { ...detail, status: newStatus }] };
+            }
+        }
         return { ...state };
-        // switch (newStatus) {
-        //     case 'todo': return {
-        //         ...state,
-        //         todo: state.todo.map(item => item = item._id === detail._id ? { ...item, status: newStatus } : item)
-        //     };
-        //     case 'in progress': return {
-        //         ...state,
-        //         inProgress: state.inProgress.map(item => item = item._id === detail._id ? { ...item, status: newStatus } : item)
-        //     };
-        //     case 'done': return {
-        //         ...state,
-        //         done: state.done.map(item => item = item._id === detail._id ? { ...item, status: newStatus } : item)
-        //     };
-        // }
     }),
     on(detailsActions.clearDetails, (_state) => ({ todo: [], inProgress: [], done: [] }))
 );

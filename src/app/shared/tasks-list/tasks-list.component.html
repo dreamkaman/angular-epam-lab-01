@@ -5,10 +5,9 @@
             <app-button text="+" (clickEmitter)="onAddDetailClick(blockTitle)"></app-button>
         </div>
 
-        <ul id="drop_zone" class="list" (dragover)="onDragOverHandle($event)" (dragend)="onDragEnd($event)"
+        <ul id="drop_zone" class="list" (dragover)="onDragOverHandle($event)"
             (dragenter)="onDragEnter($event, blockTitle)">
-            <li *ngFor="let detail of details|async" draggable="true"
-                (dragstart)="onDragStartHandle($event, detail._id)">
+            <li *ngFor="let detail of details|async" draggable="true" (dragstart)="onDragStartHandle($event, detail)">
                 <app-task [idTask]="detail._id" [taskName]="detail.name">
                 </app-task>
             </li>
