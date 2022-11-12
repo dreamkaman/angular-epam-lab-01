@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import { Status } from 'src/app/shared/tasks-list/tasks-list.service';
-import { deleteDetail } from './details.actions';
 import { DetailsItem } from './details.reducer';
 
 export interface IFormData {
@@ -51,7 +51,6 @@ export class DetailsService {
   }
 
   patchDetailStatus(auth_token: string | null, URL: string, newStatus: Status): Observable<DetailsItem> {
-    console.log('service -', URL);
     return this.http.patch(
       URL,
       { status: newStatus },
@@ -62,4 +61,17 @@ export class DetailsService {
       }
     ) as Observable<DetailsItem>;
   }
+
+  patchDetailName(auth_token: string | null, URL: string, newName: string): Observable<DetailsItem> {
+    return this.http.patch(
+      URL,
+      { name: newName },
+      {
+        headers: {
+          "Authorization": `Bearer ${auth_token}`
+        }
+      }
+    ) as Observable<DetailsItem>;
+  }
+
 }

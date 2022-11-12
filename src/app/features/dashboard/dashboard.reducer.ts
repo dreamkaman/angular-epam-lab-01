@@ -44,9 +44,6 @@ export const boardsReducer = createReducer<BoardState>(
 
         return { boards: newBoards };
 
-
-
-
     }
     ),
     on(boardActions.ascSortingByName, (state) => {

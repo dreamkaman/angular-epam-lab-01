@@ -19,9 +19,8 @@ export class DashboardService {
 
   boardName: string = '';
 
-  URL = 'http://localhost:4000/api/boards';
+  BASE_URL = 'http://localhost:4000/api/boards';
 
-  // auth_token = getToken(this.store.select(selectToken));
 
   constructor(private http: HttpClient, private store: Store<GlobalState>) { }
   getBoardId() { }
@@ -36,7 +35,7 @@ export class DashboardService {
 
   getAllBoards(auth_token: string | null) {
 
-    return this.http.get(this.URL, {
+    return this.http.get(this.BASE_URL, {
       headers: {
         "Authorization": `Bearer ${auth_token}`
       }
@@ -47,7 +46,7 @@ export class DashboardService {
     const auth_token = getToken(this.store.select(selectToken));
 
     return this.http.post(
-      this.URL,
+      this.BASE_URL,
       data,
       {
         headers: {
@@ -61,7 +60,7 @@ export class DashboardService {
   deleteBoard(boardId: string) {
     const auth_token = getToken(this.store.select(selectToken));
 
-    const delURL = this.URL + '/' + boardId;
+    const delURL = this.BASE_URL + '/' + boardId;
 
     return this.http.delete(
       delURL,
@@ -76,7 +75,7 @@ export class DashboardService {
   patchBoard(boardId: string, formData: IFormData): Observable<BoardItem> {
     const auth_token = getToken(this.store.select(selectToken));
 
-    const editURL = this.URL + '/' + boardId;
+    const editURL = this.BASE_URL + '/' + boardId;
 
 
     return this.http.patch(

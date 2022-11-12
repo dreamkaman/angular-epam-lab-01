@@ -17,9 +17,12 @@
         </ul>
     </div>
     <div class="tasks-lists-wrapper">
-        <app-tasks-list blockTitle="Todo" [details]="todoList"></app-tasks-list>
-        <app-tasks-list blockTitle="In progress" [details]="inProgressList"></app-tasks-list>
-        <app-tasks-list blockTitle="Done" [details]="doneList"></app-tasks-list>
+        <app-tasks-list blockTitle="Todo" [details]="todoList" (taskListEmitter)="archivingTask($event)">
+        </app-tasks-list>
+        <app-tasks-list blockTitle="In progress" [details]="inProgressList" (taskListEmitter)="archivingTask($event)">
+        </app-tasks-list>
+        <app-tasks-list blockTitle="Done" [details]="doneList" (taskListEmitter)="archivingTask($event)">
+        </app-tasks-list>
     </div>
 
 

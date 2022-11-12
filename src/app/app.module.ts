@@ -31,6 +31,7 @@ import { environment } from 'src/environments/environment';
 import { ButtonsBlockComponent } from './shared/buttons-block/buttons-block.component';
 import { FormEditBoardComponent } from './shared/form-edit-board/form-edit-board.component';
 import { FormAddDetailsComponent } from './shared/form-add-details/form-add-details.component';
+import { FormEditDetailComponent } from './shared/form-edit-detail/form-edit-detail.component';
 // import { EffectsModule } from '@ngrx/effects';
 // import { DashboardEffects } from '../app/features/dashboard/dashboard.effects';
 
@@ -56,7 +57,8 @@ import { FormAddDetailsComponent } from './shared/form-add-details/form-add-deta
     FormAddBoardComponent,
     ButtonsBlockComponent,
     FormEditBoardComponent,
-    FormAddDetailsComponent
+    FormAddDetailsComponent,
+    FormEditDetailComponent
   ],
   imports: [
     BrowserModule,

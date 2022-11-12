@@ -7,6 +7,8 @@ import { TaskService } from '../task/task.service';
 import * as dashboardSelectors from '../../features/dashboard/dashboard.selectors';
 import { GlobalState } from 'src/store/models/login.model';
 import * as detailsAction from '../../features/details/details.actions';
+import { ModalWindowService } from '../modal-window/modal-window.service';
+import { ContextMenuService } from './context-menu.service';
 
 @Component({
   selector: 'app-context-menu',
@@ -14,13 +16,17 @@ import * as detailsAction from '../../features/details/details.actions';
   styleUrls: ['./context-menu.component.scss']
 })
 export class ContextMenuComponent implements OnInit {
-  @Input() isVisible: boolean = false;
   @Output() clickEmitter = new EventEmitter();
+  @Input() isVisible: boolean = false;
+
   idTask: string = '';
+  BASE_URL: string = 'http://localhost:4000/api';
 
   constructor(
     private taskService: TaskService,
     private detailsService: DetailsService,
+    private modalWindowService: ModalWindowService,
+    private contextMenuService: ContextMenuService,
     private store: Store<GlobalState>,
     private router: Router
   ) { }
@@ -29,15 +35,15 @@ export class ContextMenuComponent implements OnInit {
     this.idTask = this.taskService.getIdTask()
   }
 
-  onEdit = (event: Event) => {
-    this.isVisible = false;
+  onEdit() {
+    this.taskService.setIdTask(this.idTask);
+    this.modalWindowService.openEditDetail();
   }
 
-  onDelete = (event: Event) => {
+  onDelete() {
     const auth_token = dashboardSelectors.getToken(this.store.select(dashboardSelectors.selectToken));
-    const delURL = 'http://localhost:4000/api' + this.router.url + '/' + this.idTask;
+    const delURL = this.BASE_URL + this.router.url + '/' + this.idTask;
 
-    this.isVisible = false;
     this.detailsService.deleteDetail(auth_token, delURL)
       .subscribe({
         next: detail => {
@@ -48,6 +54,10 @@ export class ContextMenuComponent implements OnInit {
         error: err => console.log(err)
       });
 
+  }
+
+  onArchive() {
+    console.log('Click onArchive!');
   }
 
 }

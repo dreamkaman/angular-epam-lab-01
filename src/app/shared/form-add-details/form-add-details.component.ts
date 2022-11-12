@@ -41,21 +41,15 @@ export class FormAddDetailsComponent implements OnInit {
 
     this.status = this.tasksListService.getStatus();
 
-    console.log(this.status);
-
-    console.log(this.URL);
   }
 
   onOkSubmit() {
     const data = this.addDetailForm.value;
     data.status = this.status;
 
-    console.log(data);
-
     this.detailsService.addNewDetail(this.auth_token, this.URL, data)
       .subscribe({
         next: detail => {
-          console.log(detail);
 
           this.store.dispatch(detailsActions.addDetail({ detail }));
 
@@ -65,8 +59,6 @@ export class FormAddDetailsComponent implements OnInit {
         },
         error: err => console.log(err)
       });
-
-    // this.store.dispatch()
 
     this.modalWindowService.closeAddDetail();
   }

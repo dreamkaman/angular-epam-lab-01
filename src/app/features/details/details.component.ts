@@ -39,20 +39,13 @@ export class DetailsComponent implements OnInit {
   auth_token = getToken(this.store.select(selectToken));
 
   constructor(
-    private route: ActivatedRoute,
     private store: Store<GlobalState>,
-    private http: HttpClient,
     private router: Router,
     private dashBoardService: DashboardService,
     private detailsService: DetailsService,
     private taskService: TaskService,
     private taskListService: TasksListService) { }
 
-  // getBoardId() {
-  //   this.routeSub = this.route.params.subscribe(params => {
-  //     this.boardId = params['boardId'];
-  //   });
-  // }
 
   ngOnInit(): void {
     this.boardName = this.dashBoardService.getBoardName();
@@ -92,7 +85,6 @@ export class DetailsComponent implements OnInit {
   }
 
   onDragEnd() {
-    console.log('I am working!!!!')
 
     const auth_token = dashboardSelectors.getToken(this.store.select(dashboardSelectors.selectToken));
     const patchURL = this.BASE_URL + this.router.url + '/' + this.taskListService.getDraggingDetail()._id;
@@ -107,7 +99,7 @@ export class DetailsComponent implements OnInit {
 
     this.detailsService.patchDetailStatus(auth_token, patchURL, newStatus).subscribe({
       next: detail => {
-        this.store.dispatch(detailsActions.changeStatus({ detail, newStatus }))
+        this.store.dispatch(detailsActions.changeDetailStatus({ detail, newStatus }));
 
         this.todoList = this.store.select(detailsSelector.selectDetailsTodo);
         this.inProgressList = this.store.select(detailsSelector.selectDetailsInProgress);
@@ -117,4 +109,24 @@ export class DetailsComponent implements OnInit {
     });
   }
 
+  archivingTask(idTask: string) {
+    console.log('Click archivingTask!');
+    const auth_token = dashboardSelectors.getToken(this.store.select(dashboardSelectors.selectToken));
+    console.log(auth_token);
+    const patchURL = this.BASE_URL + this.router.url + '/' + idTask;
+    const newStatus: Status = 'archived';
+
+    this.detailsService.patchDetailStatus(auth_token, patchURL, newStatus).subscribe({
+      next: detail => {
+        this.store.dispatch(detailsActions.changeDetailStatus({ detail, newStatus }));
+
+        this.todoList = this.store.select(detailsSelector.selectDetailsTodo);
+        this.inProgressList = this.store.select(detailsSelector.selectDetailsInProgress);
+        this.doneList = this.store.select(detailsSelector.selectDetailsDone);
+        alert('Task was archived successfully!');
+      },
+      error: err => console.log(err)
+    });
+
+  }
 }

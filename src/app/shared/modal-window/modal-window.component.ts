@@ -14,6 +14,7 @@ export class ModalWindowComponent implements OnInit {
   isAddBoardModalVisible$: Observable<boolean> = new Observable<false>;
   isEditBoardModalVisible$: Observable<boolean> = new Observable<false>;
   isAddDetailModalVisible$: Observable<boolean> = new Observable<false>;
+  isEditDetailModalVisible$: Observable<boolean> = new Observable<false>;
 
 
   constructor(
@@ -27,6 +28,8 @@ export class ModalWindowComponent implements OnInit {
     this.isEditBoardModalVisible$ = this.modalWindowService.watchEditBoard();
 
     this.isAddDetailModalVisible$ = this.modalWindowService.watchAddDetail();
+
+    this.isEditDetailModalVisible$ = this.modalWindowService.watchEditDetail();
   }
 
 
@@ -50,6 +53,13 @@ export class ModalWindowComponent implements OnInit {
     if (event.target == event.currentTarget) {
 
       this.modalWindowService.closeAddDetail();
+    }
+  }
+
+  onEditDetailBackdropClick(event: MouseEvent) {
+    if (event.target == event.currentTarget) {
+
+      this.modalWindowService.closeEditDetail();
     }
   }
 

@@ -1,7 +1,11 @@
 <div [id]="idTask" class="task-item">
+    <button class="archive" type="button" (click)="taskEmitter.emit(idTask)">
+        <img src="../../../assets/images/archive-blue.png" alt="Archive button">
+    </button>
+
     <p class="task-name">{{taskName}}</p>
     <div>
-        <app-menu-button></app-menu-button>
+        <app-menu-button [id]="idTask"></app-menu-button>
     </div>
 
 </div>

@@ -15,6 +15,12 @@ export class ModalWindowService {
   private displayAddDetail: BehaviorSubject<boolean> =
     new BehaviorSubject(false);
 
+  private displayEditDetail: BehaviorSubject<boolean> =
+    new BehaviorSubject(false);
+
+
+
+
   watchAddBoard(): Observable<boolean> {
     return this.displayAddBoard.asObservable();
   }
@@ -49,5 +55,17 @@ export class ModalWindowService {
 
   closeAddDetail() {
     this.displayAddDetail.next(false);
+  }
+
+  watchEditDetail(): Observable<boolean> {
+    return this.displayEditDetail.asObservable();
+  }
+
+  openEditDetail() {
+    this.displayEditDetail.next(true);
+  }
+
+  closeEditDetail() {
+    this.displayEditDetail.next(false);
   }
 }

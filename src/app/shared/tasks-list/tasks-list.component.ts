@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChildren, QueryList, ElementRef, EventEmitter } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, fromEvent, throttle, throttleTime, debounceTime, distinctUntilChanged, last, first } from 'rxjs';
 import { DetailsItem } from 'src/app/features/details/details.reducer';
@@ -19,6 +19,8 @@ import { TaskService } from '../task/task.service';
 export class TasksListComponent implements OnInit {
   @Input() blockTitle: string = '';
   @Input() details!: Observable<DetailsItem[]>;
+
+  @Output() taskListEmitter = new EventEmitter();
 
   status!: Status;
 
@@ -44,7 +46,7 @@ export class TasksListComponent implements OnInit {
 
 
   onAddDetailClick(blockTitle: string) {
-    console.log("Click on plus button!");
+
 
     switch (blockTitle) {
       case 'Todo': this.status = 'todo'; break;
@@ -58,82 +60,21 @@ export class TasksListComponent implements OnInit {
     this.modalWindowService.openAddDetail();
   }
 
-  onDragStartHandle(event: DragEvent, detail: DetailsItem) {
-    console.log('onDragStartHandle - ', detail);
+  onDragStartHandle(detail: DetailsItem) {
     this.tasksListService.setDraggingDetail(detail);
   }
 
-  onDragOverHandle(event: DragEvent) {
-    // console.log('onDragOverHandle - ', event);
-    // const auth_token = dashboardSelectors.getToken(this.store.select(dashboardSelectors.selectToken));
-    // const patchURL = this.BASE_URL + this.router.url + '/' + this.draggingDetail?._id;
-    // this.blockTitle$
-    //   .pipe(
-    //     throttleTime(1000),
-    //     last()
-    //   )
-    //   .subscribe((value) => {
-    //     console.log(value);
-    //   }
-    //   );
-
-    // let newStatus: Status = 'todo';
-    // switch (this.blockTitle) {
-    //   case 'Todo': newStatus = 'todo'; break;
-    //   case 'In progress': newStatus = 'in progress'; break;
-    //   case 'Done': newStatus = 'done'; break;
-    //   default: console.log('Bad parameter');
-    // }
-
-    // setTimeout(() => {
-    //   this.detailListService.patchDetailStatus(auth_token, patchURL, newStatus).subscribe({
-    //     next: detail => {
-    //       console.log(detail);
-    //       // this.store.dispatch(detailsActions.getDetails({ detailsAll }));
-
-    //       // this.todoList = this.store.select(detailsSelector.selectDetailsTodo);
-    //       // this.inProgressList = this.store.select(detailsSelector.selectDetailsInProgress);
-    //       // this.doneList = this.store.select(detailsSelector.selectDetailsDone);
-    //     },
-    //     error: err => console.log(err)
-    //   });
-    // }, 2000);
-
-    // this.store.dispatch(detailsActions.changeStatus({ detail: this.currentTask, newStatus }))
-
+  onDragOverHandle() {
+    // console.log('onDragOverHandle works!!!')
   }
 
-  onDragEnter(event: DragEvent, blockTitle: string) {
-    console.log('onDragEnter works! - ', blockTitle);
-    this.taskService.setDestination(blockTitle);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  onDragLeave() {
+    // console.log('onDragLeave works!');
   }
 
-  // onDragEnd(event: DragEvent) {
-  //   const auth_token = dashboardSelectors.getToken(this.store.select(dashboardSelectors.selectToken));
-  //   const patchURL = this.BASE_URL + this.router.url + '/' + this.tasksListService.getDraggingDetail()._id;
-
-  //   let newStatus: Status = 'todo';
-  //   switch (this.taskService.getDestination()) {
-  //     case 'Todo': newStatus = 'todo'; break;
-  //     case 'In progress': newStatus = 'in progress'; break;
-  //     case 'Done': newStatus = 'done'; break;
-  //     default: console.log('Bad parameter');
-  //   }
-
-  //   this.detailsService.patchDetailStatus(auth_token, patchURL, newStatus).subscribe({
-  //     next: responseData => {
-  //       console.log('Http response - ', responseData);
-  //       // this.store.dispatch(detailsActions.getDetails({ detailsAll }));
-
-  //       // this.todoList = this.store.select(detailsSelector.selectDetailsTodo);
-  //       // this.inProgressList = this.store.select(detailsSelector.selectDetailsInProgress);
-  //       // this.doneList = this.store.select(detailsSelector.selectDetailsDone);
-  //     },
-  //     error: err => console.log(err)
-  //   });
-  // }
-
-
+  onDragEnter(blockTitle: string) {
+    this.taskService.setDestination(blockTitle);
+  }
 
 }
 

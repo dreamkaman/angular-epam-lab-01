@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DetailsItem } from 'src/app/features/details/details.reducer';
 
-export type Status = 'todo' | 'in progress' | 'done';
+export type Status = 'todo' | 'in progress' | 'done' | 'archived';
 
 @Injectable({
   providedIn: 'root'

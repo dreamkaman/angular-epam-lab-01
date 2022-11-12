@@ -10,3 +10,8 @@
     (click)="onAddDetailBackdropClick($event)">
     <app-form-add-details></app-form-add-details>
 </div>
+
+<div class="backdrop" *ngIf="isEditDetailModalVisible$|async as isEditDetailModalVisible"
+    (click)="onEditDetailBackdropClick($event)">
+    <app-form-edit-detail></app-form-edit-detail>
+</div>

@@ -10,8 +10,21 @@
   border-radius: 3px;
 
   background-color: #e0e0e0;
+  box-shadow: 2px 2px 2px 0px rgb(185, 185, 185);
+  cursor: move;
 }
 
+.archive {
+  width: 15px;
+  height: 15px;
+  padding: 1px;
+
+  border-radius: 2px;
+  border: none;
+  // border: 1px solid black;
+  box-shadow: 2px 2px 2px 0px rgb(185, 185, 185);
+  cursor: pointer;
+}
 .task-name {
   max-width: 90%;
   overflow: hidden;
