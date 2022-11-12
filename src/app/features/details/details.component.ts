@@ -76,12 +76,12 @@ export class DetailsComponent implements OnInit {
     console.log("Hello2 in details!");
   }
 
-  onAscBtnClick() {
-    console.log("Hello3 in details!");
+  onAscSortByDetailName() {
+    this.store.dispatch(detailsActions.ascSortByDetailName());
   }
 
-  onDscBtnClick() {
-    console.log("Hello4 in details!");
+  onDscSortByDetailName() {
+    this.store.dispatch(detailsActions.dscSortByDetailName());
   }
 
   onDragEnd() {

@@ -62,18 +62,18 @@ export class DashboardComponent implements
   }
 
   onAscSortingByName() {
-    this.store.dispatch(dashboardActions.ascSortingByName());
+    this.store.dispatch(dashboardActions.ascSortingByBoardName());
   }
 
   onDscSortingByName() {
-    this.store.dispatch(dashboardActions.dscSortingByName());
+    this.store.dispatch(dashboardActions.dscSortingByBoardName());
   }
 
   onAscSortingByDate() {
-    this.store.dispatch(dashboardActions.ascSortingByDate());
+    this.store.dispatch(dashboardActions.ascSortingByBoardDate());
   }
 
   onDscSortingByDate() {
-    this.store.dispatch(dashboardActions.dscSortingByName());
+    this.store.dispatch(dashboardActions.dscSortingByBoardName());
   }
 }

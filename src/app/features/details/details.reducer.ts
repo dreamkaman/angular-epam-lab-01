@@ -9,7 +9,8 @@ export interface DetailsItem {
     _id: string,
     boardId: string,
     name: string,
-    status: Status
+    status: Status,
+    createdAt: string
 };
 
 
@@ -56,7 +57,7 @@ export const detailsReducer = createReducer(
             case 'in progress': return { ...state, inProgress: state.inProgress.filter(item => item._id !== _id) };
             case 'done': return { ...state, done: state.done.filter(item => item._id !== _id) };
             case 'archived': return { ...state, archived: state.archived.filter(item => item._id !== _id) };
-            default: return { ...state };
+            default: console.log('Bad data!'); return { ...state };
         }
     }),
     on(detailsActions.changeDetailStatus, (state, { detail, newStatus }) => {
@@ -124,6 +125,74 @@ export const detailsReducer = createReducer(
                 archived: state.archived.map(item => item = item._id === detail._id ? { ...item, name: newName } : item)
             };
             default: return { ...state };
+        }
+    }),
+    on(detailsActions.ascSortByDetailName, (state) => {
+        const sortedState = {
+            ...state,
+            todo: [...state.todo],
+            inProgress: [...state.inProgress],
+            done: [...state.done],
+            archived: [...state.archived]
+        }
+
+        return {
+            todo: sortedState.todo.sort((a, b) => a.name.localeCompare(b.name)),
+            inProgress: sortedState.inProgress.sort((a, b) => a.name.localeCompare(b.name)),
+            done: sortedState.done.sort((a, b) => a.name.localeCompare(b.name)),
+            archived: sortedState.archived
+        }
+
+    }
+    ),
+    on(detailsActions.dscSortByDetailName, (state) => {
+        const sortedState = {
+            ...state,
+            todo: [...state.todo],
+            inProgress: [...state.inProgress],
+            done: [...state.done],
+            archived: [...state.archived]
+        }
+
+        return {
+            todo: sortedState.todo.sort((a, b) => a.name.localeCompare(b.name)),
+            inProgress: sortedState.inProgress.sort((a, b) => b.name.localeCompare(a.name)),
+            done: sortedState.done.sort((a, b) => a.name.localeCompare(b.name)),
+            archived: sortedState.archived
+        }
+
+    }
+    ),
+    on(detailsActions.ascSortByDetailDate, (state) => {
+        const sortedState = {
+            ...state,
+            todo: [...state.todo],
+            inProgress: [...state.inProgress],
+            done: [...state.done],
+            archived: [...state.archived]
+        }
+
+        return {
+            todo: sortedState.todo.sort((a, b) => (new Date(a.createdAt)).getTime() - (new Date(b.createdAt)).getTime()),
+            inProgress: sortedState.inProgress.sort((a, b) => (new Date(a.createdAt)).getTime() - (new Date(b.createdAt)).getTime()),
+            done: sortedState.done.sort((a, b) => (new Date(a.createdAt)).getTime() - (new Date(b.createdAt)).getTime()),
+            archived: sortedState.archived
+        }
+    }),
+    on(detailsActions.dscSortByDetailDate, (state) => {
+        const sortedState = {
+            ...state,
+            todo: [...state.todo],
+            inProgress: [...state.inProgress],
+            done: [...state.done],
+            archived: [...state.archived]
+        }
+
+        return {
+            todo: sortedState.todo.sort((a, b) => (new Date(b.createdAt)).getTime() - (new Date(a.createdAt)).getTime()),
+            inProgress: sortedState.inProgress.sort((a, b) => (new Date(b.createdAt)).getTime() - (new Date(a.createdAt)).getTime()),
+            done: sortedState.done.sort((a, b) => (new Date(b.createdAt)).getTime() - (new Date(a.createdAt)).getTime()),
+            archived: sortedState.archived
         }
     }),
     on(detailsActions.clearDetails, (_state) => ({ todo: [], inProgress: [], done: [], archived: [] }))

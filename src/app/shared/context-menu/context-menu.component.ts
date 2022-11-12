@@ -37,6 +37,7 @@ export class ContextMenuComponent implements OnInit {
 
   onEdit() {
     this.taskService.setIdTask(this.idTask);
+    this.isVisible = false;
     this.modalWindowService.openEditDetail();
   }
 
@@ -47,17 +48,11 @@ export class ContextMenuComponent implements OnInit {
     this.detailsService.deleteDetail(auth_token, delURL)
       .subscribe({
         next: detail => {
-
           this.store.dispatch(detailsAction.deleteDetail({ detail }));
-
         },
         error: err => console.log(err)
       });
 
-  }
-
-  onArchive() {
-    console.log('Click onArchive!');
   }
 
 }

@@ -26,7 +26,7 @@ export const boardsReducer = createReducer<BoardState>(
     initialState,
     on(boardActions.getAllBoards, (_state, { boards }) => ({ boards: [...boards] })),
     on(boardActions.addBoard, (state, { board }) => {
-        return { boards: [...state.boards, board] }
+        return { ...state, boards: [...state.boards, board] }
     }),
     on(boardActions.deleteBoard, (state, { id }) => ({ boards: [...state.boards.filter((board) => board._id !== id)] })),
     on(boardActions.patchBoard, (state, { board }) => {
@@ -35,37 +35,37 @@ export const boardsReducer = createReducer<BoardState>(
                 oldBoard._id === board._id ? { ...oldBoard, name: board.name, description: board.description } : oldBoard
             );
 
-            return { boards: newBoards };
+            return { ...state, boards: newBoards };
         }
 
         const newBoards = state.boards.map(oldBoard =>
             oldBoard._id === board._id ? { ...oldBoard, name: board.name } : oldBoard
         );
 
-        return { boards: newBoards };
+        return { ...state, boards: newBoards };
 
     }
     ),
-    on(boardActions.ascSortingByName, (state) => {
+    on(boardActions.ascSortingByBoardName, (state) => {
         const sortedBoards = [...state.boards];
         sortedBoards.sort((a, b) => a.name.localeCompare(b.name));
-        return { boards: sortedBoards };
+        return { ...state, boards: sortedBoards };
     }),
-    on(boardActions.dscSortingByName, (state) => {
+    on(boardActions.dscSortingByBoardName, (state) => {
         const sortedBoards = [...state.boards];
         sortedBoards.sort((a, b) => b.name.localeCompare(a.name));
-        return { boards: sortedBoards };
+        return { ...state, boards: sortedBoards };
     }),
-    on(boardActions.ascSortingByDate, (state) => {
+    on(boardActions.ascSortingByBoardDate, (state) => {
         const sortedBoards = [...state.boards];
         sortedBoards.sort((a, b) => (new Date(a.creationDate)).getTime() - (new Date(b.creationDate)).getTime());
-        return { boards: sortedBoards };
+        return { ...state, boards: sortedBoards };
     }),
-    on(boardActions.dscSortingByDate, (state) => {
+    on(boardActions.dscSortingByBoardDate, (state) => {
         const sortedBoards = [...state.boards];
         sortedBoards.sort((a, b) => (new Date(b.creationDate)).getTime() - (new Date(a.creationDate)).getTime());
-        return { boards: sortedBoards };
+        return { ...state, boards: sortedBoards };
     }),
-    on(boardActions.clearBoards, (_state) => ({ boards: [] }))
+    on(boardActions.clearBoards, (state) => ({ ...state, boards: [] }))
 
 );
