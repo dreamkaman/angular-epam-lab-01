@@ -3,7 +3,7 @@ import * as taskActions from './task.actions';
 
 export interface CommentItem {
     commentId: string,
-    commentText: string,
+    text: string,
     detailId: string
 }
 

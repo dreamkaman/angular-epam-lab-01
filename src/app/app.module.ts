@@ -36,6 +36,8 @@ import { SignupComponent } from './features/signup/signup.component';
 import { FormAddCommentComponent } from './shared/form-add-comment/form-add-comment.component';
 import { CommentComponent } from './shared/comment/comment.component';
 import { commentsReducer } from './shared/task/task.reducer';
+import { TaskFilterPipe } from './shared/task/task.pipe';
+import { TaskFilterSyncPipe } from './shared/task/task-filter-sync.pipe';
 
 
 
@@ -64,7 +66,9 @@ import { commentsReducer } from './shared/task/task.reducer';
     FilterComponent,
     SignupComponent,
     FormAddCommentComponent,
-    CommentComponent
+    CommentComponent,
+    TaskFilterPipe,
+    TaskFilterSyncPipe
   ],
   imports: [
     BrowserModule,

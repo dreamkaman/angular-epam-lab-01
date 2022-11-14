@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CommentComponent implements OnInit {
   @Input() commentText: string = 'This is a default text of the comment component! This is a default text of the comment component! This is a default text of the comment component!';
+
   constructor() { }
 
   ngOnInit(): void {

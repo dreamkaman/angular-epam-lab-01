@@ -9,7 +9,7 @@ import { TaskService } from './task.service';
 
 import { GlobalState } from 'src/store/models/store.model';
 import { selectComments } from './task.selectors';
-import { CommentItem, CommentsState } from './task.reducer';
+import { CommentItem } from './task.reducer';
 import * as taskActions from './task.actions';
 import { ModalWindowService } from '../modal-window/modal-window.service';
 
@@ -26,11 +26,9 @@ export class TaskComponent implements OnInit {
   @Output() taskEmitter = new EventEmitter<string>;
   @Output() addCommentEmitter = new EventEmitter;
 
-  comments: Observable<CommentsState> = this.store.select(selectComments);
+  comments: Observable<CommentItem[]> = this.store.select(selectComments);
 
-  detailComments!: CommentItem[];
-
-
+  // commentsSync: CommentItem[] = [];
 
   BASE_URL: string = 'http://localhost:4000/api';
   destination: string = '';
@@ -45,16 +43,6 @@ export class TaskComponent implements OnInit {
   ngOnInit(): void {
     this.taskService.setIdTask(this.idTask);
     this.contextMenuService.setTaskName(this.taskName);
-
-    // this.comments.subscribe({
-    //   next: comments => {
-    //     console.log(comments);
-
-    //     // this.detailComments = comments.filter(item => item.detailId === this.idTask);
-    //     // console.log(this.detailComments);
-    //   },
-    //   error: err => console.log(err)
-    // });
 
     this.getComments();
   }

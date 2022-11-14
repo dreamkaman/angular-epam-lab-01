@@ -1,6 +1,12 @@
 import { createSelector } from "@ngrx/store";
-import { Observable } from "rxjs";
 import { GlobalState } from "src/store/models/store.model";
 
 
-export const selectComments = (state: GlobalState) => state.comments;
+
+
+const commentsState = (state: GlobalState) => state.comments;
+
+export const selectComments = createSelector(
+    commentsState,
+    (state: GlobalState['comments']) => state.comments
+)
