@@ -13,6 +13,7 @@ import * as dashboardSelectors from '../dashboard/dashboard.selectors';
 import { Status, TasksListService } from 'src/app/shared/tasks-list/tasks-list.service';
 import { TaskService } from 'src/app/shared/task/task.service';
 import { Router } from '@angular/router';
+import * as taskActions from '../../shared/task/task.actions';
 
 
 @Component({
@@ -50,6 +51,11 @@ export class DetailsComponent implements OnInit {
 
     this.getAllDetails();
 
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch(taskActions.clearComments());
+    console.log('ngOnDestroy is working!');
   }
 
   onFilterNameBtnClick(filterText: string) {
@@ -147,12 +153,9 @@ export class DetailsComponent implements OnInit {
   getAllDetails() {
     const auth_token: string | null = getValue(this.store.select(selectToken));
 
-    // let detailsAll: DetailsItem[] = [];
-
     this.detailsService.getAllDetails(auth_token, this.BASE_URL + this.router.url)
       .subscribe({
         next: detailsAll => {
-          // detailsAll = details;
           this.store.dispatch(detailsActions.getDetails({ detailsAll }));
 
           this.todoList = this.store.select(detailsSelector.selectDetailsTodo);
@@ -162,4 +165,5 @@ export class DetailsComponent implements OnInit {
         error: err => console.log(err)
       });
   }
+
 }

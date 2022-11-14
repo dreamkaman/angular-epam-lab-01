@@ -66,4 +66,11 @@ export class ModalWindowComponent implements OnInit {
     }
   }
 
+  onAddCommentBackdropClick(event: MouseEvent) {
+    if (event.target == event.currentTarget) {
+
+      this.modalWindowService.closeAddComment();
+    }
+  }
+
 }

@@ -11,6 +11,7 @@ import { GlobalState } from 'src/store/models/store.model';
 import { selectComments } from './task.selectors';
 import { CommentItem, CommentsState } from './task.reducer';
 import * as taskActions from './task.actions';
+import { ModalWindowService } from '../modal-window/modal-window.service';
 
 @Component({
   selector: 'app-task',
@@ -37,31 +38,37 @@ export class TaskComponent implements OnInit {
   constructor(
     private taskService: TaskService,
     private contextMenuService: ContextMenuService,
-    private store: Store<GlobalState>
+    private store: Store<GlobalState>,
+    private modalWindowService: ModalWindowService
   ) { }
 
   ngOnInit(): void {
     this.taskService.setIdTask(this.idTask);
     this.contextMenuService.setTaskName(this.taskName);
 
-    this.taskService.getAllComments()
-      .subscribe({
-        next: comments => {
+    // this.comments.subscribe({
+    //   next: comments => {
+    //     console.log(comments);
 
-          this.store.dispatch(taskActions.addAllComments({ comments }))
-        }
-      })
+    //     // this.detailComments = comments.filter(item => item.detailId === this.idTask);
+    //     // console.log(this.detailComments);
+    //   },
+    //   error: err => console.log(err)
+    // });
 
-    this.comments.subscribe({
-      next: comments => {
-        console.log(comments);
-
-        // this.detailComments = comments.filter(item => item.detailId === this.idTask);
-        // console.log(this.detailComments);
-      },
-      error: err => console.log(err)
-    });
+    this.getComments();
   }
 
+  onAddComment() {
+    this.modalWindowService.openAddComment();
+  }
 
+  getComments() {
+    this.taskService.getDetailComments()
+      .subscribe({
+        next: comments => {
+          this.store.dispatch(taskActions.addComments({ comments }))
+        }
+      })
+  }
 }

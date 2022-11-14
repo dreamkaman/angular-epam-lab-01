@@ -17,5 +17,9 @@ const initialState: CommentsState = {
 
 export const commentsReducer = createReducer<CommentsState>(
     initialState,
-    on(taskActions.addAllComments, (_state, { comments }) => ({ comments: [...comments] }))
+    on(taskActions.addComments, (state, { comments }) => ({ comments: [...state.comments, ...comments] })),
+    on(taskActions.addComment, (state, { comment }) => ({
+        comments: [...state.comments, comment]
+    })),
+    on(taskActions.clearComments, (_state) => ({ comments: [] }))
 )

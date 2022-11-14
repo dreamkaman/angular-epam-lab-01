@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { GlobalState } from 'src/store/models/store.model';
+import { ModalWindowService } from '../modal-window/modal-window.service';
+import { TaskService } from '../task/task.service';
+import * as taskActions from '../task/task.actions';
 
 @Component({
   selector: 'app-form-add-comment',
@@ -6,17 +12,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form-add-comment.component.scss']
 })
 export class FormAddCommentComponent implements OnInit {
+  @ViewChild('f') addCommentForm!: NgForm;
 
-  constructor() { }
+  constructor(
+    private modalWindowService: ModalWindowService,
+    private taskService: TaskService,
+    private store: Store<GlobalState>
+  ) { }
 
   ngOnInit(): void {
   }
 
   onOkSubmit() {
-    console.log('onOkSubmit clicked!');
+    console.log(this.addCommentForm.value);
+
+    const { text } = this.addCommentForm.value;
+
+    this.taskService.postComment(text)
+      .subscribe({
+        next: comment => {
+          this.store.dispatch(taskActions.addComment({ comment }));
+        },
+        error: err => console.log(err)
+      });
+
+    this.modalWindowService.closeAddComment();
   }
 
   onCloseBtnClick() {
-    console.log('onCloseBtnClick clicked!');
+    this.modalWindowService.closeAddComment();
   }
 }

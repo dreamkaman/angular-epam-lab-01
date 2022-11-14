@@ -11,6 +11,7 @@ import { Status, TasksListService } from '../tasks-list/tasks-list.service';
 import * as detailsActions from '../../features/details/details.actions';
 
 
+
 @Component({
   selector: 'app-form-add-details',
   templateUrl: './form-add-details.component.html',
