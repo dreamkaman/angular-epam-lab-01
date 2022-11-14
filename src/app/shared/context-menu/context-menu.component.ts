@@ -26,7 +26,6 @@ export class ContextMenuComponent implements OnInit {
     private taskService: TaskService,
     private detailsService: DetailsService,
     private modalWindowService: ModalWindowService,
-    private contextMenuService: ContextMenuService,
     private store: Store<GlobalState>,
     private router: Router
   ) { }

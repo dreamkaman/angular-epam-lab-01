@@ -1,15 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { getValue, selectToken } from 'src/app/features/dashboard/dashboard.selectors';
-import { DashboardService } from 'src/app/features/dashboard/dashboard.service';
+
 import { DetailsService } from 'src/app/features/details/details.service';
 import { GlobalState } from 'src/store/models/store.model';
 import { ModalWindowService } from '../modal-window/modal-window.service';
 import { Status, TasksListService } from '../tasks-list/tasks-list.service';
 import * as detailsActions from '../../features/details/details.actions';
-import * as detailsSelector from '../../features/details/details.selectors';
+
 
 @Component({
   selector: 'app-form-add-details',
@@ -18,7 +18,6 @@ import * as detailsSelector from '../../features/details/details.selectors';
 })
 export class FormAddDetailsComponent implements OnInit {
   @ViewChild('f') addDetailForm!: NgForm;
-  // http://localhost:4000/api/boards/6366d506caa70d9d2d0ef6b0/details
 
   URL = 'http://localhost:4000/api' + this.router.url;
 
@@ -27,10 +26,8 @@ export class FormAddDetailsComponent implements OnInit {
   status!: Status
 
   constructor(
-    private activatedRoute: ActivatedRoute,
     private router: Router,
     private modalWindowService: ModalWindowService,
-    private dashBoardService: DashboardService,
     private store: Store<GlobalState>,
     private detailsService: DetailsService,
     private tasksListService: TasksListService
@@ -53,9 +50,6 @@ export class FormAddDetailsComponent implements OnInit {
 
           this.store.dispatch(detailsActions.addDetail({ detail }));
 
-          // this.todoList = this.store.select(detailsSelector.selectDetailsTodo);
-          // this.inProgressList = this.store.select(detailsSelector.selectDetailsInProgress);
-          // this.doneList = this.store.select(detailsSelector.selectDetailsDone);
         },
         error: err => console.log(err)
       });

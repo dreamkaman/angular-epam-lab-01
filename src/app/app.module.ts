@@ -12,7 +12,6 @@ import { LoginComponent } from './features/login/login.component';
 import { InputComponent } from './shared/input/input.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { DetailsComponent } from './features/details/details.component';
-import { ButtonsListComponent } from './shared/buttons-list/buttons-list.component';
 import { MenuButtonComponent } from './shared/menu-button/menu-button.component';
 import { AvatarComponent } from './shared/avatar/avatar.component';
 import { TasksListComponent } from './shared/tasks-list/tasks-list.component';
@@ -50,7 +49,6 @@ import { commentsReducer } from './shared/task/task.reducer';
     InputComponent,
     DashboardComponent,
     DetailsComponent,
-    ButtonsListComponent,
     MenuButtonComponent,
     AvatarComponent,
     TasksListComponent,

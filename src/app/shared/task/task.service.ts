@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 
 import { GlobalState } from 'src/store/models/store.model';
 import { getValue, selectToken } from '../../features/dashboard/dashboard.selectors';
-import { CommentItem, CommentsState } from './task.reducer';
+import { CommentItem } from './task.reducer';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class TaskService {
 
   destination: string = '';
 
-  BASE_URL = 'http://localhost:4000/api/boards';
+  BASE_URL = 'http://localhost:4000/api';
 
   constructor(
     private http: HttpClient,
@@ -40,7 +40,7 @@ export class TaskService {
   }
 
   getAllComments() {
-    const getURL = this.BASE_URL + this.router.url + '/' + this.idTask;
+    const getURL = this.BASE_URL + this.router.url + '/' + this.idTask + '/comments';
     const auth_token = getValue(this.store.select(selectToken));
 
     return this.http.get(

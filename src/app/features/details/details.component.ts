@@ -1,9 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { Subscription } from 'rxjs/internal/Subscription';
 
 import { DetailsItem } from './details.reducer';
 import * as detailsActions from './details.actions';
@@ -15,6 +12,7 @@ import { DetailsService } from './details.service';
 import * as dashboardSelectors from '../dashboard/dashboard.selectors';
 import { Status, TasksListService } from 'src/app/shared/tasks-list/tasks-list.service';
 import { TaskService } from 'src/app/shared/task/task.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -29,8 +27,6 @@ export class DetailsComponent implements OnInit {
   @Output() doneList!: Observable<DetailsItem[]>;
 
   boardName: string = '';
-
-  // routeSub: Subscription = new Subscription;
 
   BASE_URL = 'http://localhost:4000/api';
 

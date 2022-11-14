@@ -1,16 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
 import { DetailsService } from 'src/app/features/details/details.service';
 import { ContextMenuService } from '../context-menu/context-menu.service';
 import { TaskService } from './task.service';
-import * as dashboardSelectors from '../../features/dashboard/dashboard.selectors';
+
 import { GlobalState } from 'src/store/models/store.model';
-import { Store } from '@ngrx/store';
-import { Router } from '@angular/router';
-import { Status } from '../tasks-list/tasks-list.service';
-import * as detailsActions from '../../features/details/details.actions';
-import { Observable } from 'rxjs';
 import { selectComments } from './task.selectors';
-import { CommentsState } from './task.reducer';
+import { CommentItem, CommentsState } from './task.reducer';
 import * as taskActions from './task.actions';
 
 @Component({
@@ -28,7 +27,7 @@ export class TaskComponent implements OnInit {
 
   comments: Observable<CommentsState> = this.store.select(selectComments);
 
-  detailComments!: CommentsState;
+  detailComments!: CommentItem[];
 
 
 
@@ -38,9 +37,7 @@ export class TaskComponent implements OnInit {
   constructor(
     private taskService: TaskService,
     private contextMenuService: ContextMenuService,
-    private detailsService: DetailsService,
-    private store: Store<GlobalState>,
-    private router: Router
+    private store: Store<GlobalState>
   ) { }
 
   ngOnInit(): void {

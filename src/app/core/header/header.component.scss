@@ -9,7 +9,6 @@ header {
   font-weight: 800;
   font-family: Roboto, sans-serif;
 
-  // color: #1976d2;
   background-color: rgba(134, 134, 134, 0.25);
 }
 .left-wrapper {
@@ -25,7 +24,6 @@ header {
 .right-wrapper {
   display: flex;
   align-items: center;
-  // justify-content: center;
 }
 .avatar-wrapper {
   margin-right: 20px;
@@ -48,7 +46,6 @@ header {
   border-radius: 5px;
   font-weight: 400;
   font-size: 15px;
-  // border: 2px solid #1976d2;
   border: transparent;
   box-shadow: 2px 2px 3px 0px rgb(185 185 185);
   color: white;

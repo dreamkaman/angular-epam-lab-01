@@ -2,8 +2,7 @@ import * as detailsActions from './details.actions';
 
 import { createReducer, on } from '@ngrx/store';
 import { Status } from 'src/app/shared/tasks-list/tasks-list.service';
-import { state } from '@angular/animations';
-//import * as boardActions from './dashboard.actions';
+
 
 
 export interface DetailsItem {
@@ -42,7 +41,6 @@ export const detailsReducer = createReducer(
     }),
     on(detailsActions.addDetail, (state, { detail }) => {
         const { status } = detail;
-        // let newState: DetailsItem;
         switch (status) {
             case 'todo': return { ...state, todo: [...state.todo, detail] };
             case 'in progress': return { ...state, inProgress: [...state.inProgress, detail] };
@@ -63,9 +61,7 @@ export const detailsReducer = createReducer(
     }),
     on(detailsActions.changeDetailStatus, (state, { detail, newStatus }) => {
         let newState!: DetailState;
-        //Delete task from old place
         if (detail.status !== newStatus) {
-            //Delete task from old place
             switch (detail.status) {
                 case 'todo': newState = {
                     ...state,
@@ -199,15 +195,12 @@ export const detailsReducer = createReducer(
             ...state,
             todo: [...state.todo.filter(item => {
                 return item.name.toUpperCase().includes(filterText.toUpperCase());
-                // item.name.includes(filterTxt);
             })],
             inProgress: [...state.inProgress.filter(item => {
                 return item.name.toUpperCase().includes(filterText.toUpperCase());
-                // item.name.includes(filterTxt);
             })],
             done: [...state.done.filter(item => {
                 return item.name.toUpperCase().includes(filterText.toUpperCase());
-                // item.name.includes(filterTxt);
             })],
             archived: [...state.archived]
         }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { getValue, selectToken } from 'src/app/features/dashboard/dashboard.selectors';
+
 import { DashboardService } from 'src/app/features/dashboard/dashboard.service';
 import { GlobalState } from 'src/store/models/store.model';
 
@@ -19,7 +19,6 @@ import { IFormData } from 'src/app/features/dashboard/dashboard.service';
 export class FormAddBoardComponent implements OnInit {
   @ViewChild('f') addBoardForm!: NgForm;
 
-  // auth_token = getToken(this.store.select(selectToken));
 
   constructor(
     private modalWindowService: ModalWindowService,

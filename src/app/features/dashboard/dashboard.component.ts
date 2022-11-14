@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ModalWindowService } from 'src/app/shared/modal-window/modal-window.service';
@@ -18,13 +18,11 @@ import * as dashboardActions from '../dashboard/dashboard.actions';
 
 export class DashboardComponent implements
   OnInit {
-  // @Input() boards: Observable<BoardItem[]> = this.store.select(selectBoards);
   boards: Observable<BoardItem[]> = this.store.select(selectBoards);
 
   auth_token = getValue(this.store.select(selectToken));
 
   sortType: string = 'Sort by name';
-  // sortState: boolean = true;
 
   constructor(private store: Store<GlobalState>,
     private dashBoardService: DashboardService,
@@ -106,7 +104,6 @@ export class DashboardComponent implements
     this.dashBoardService.getAllBoards(this.auth_token)
       .subscribe({
         next: boards => {
-          // const boards = responseData;
           this.store.dispatch(dashboardActions.getAllBoards({ boards }));
         },
         error: err => console.log(err)

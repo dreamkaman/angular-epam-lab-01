@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -22,12 +21,11 @@ export class SignupComponent implements OnInit {
 
 
   constructor(
-    private signupService: SignupService,
-    private store: Store<GlobalState>, private router: Router
+    private signupService: SignupService
   ) { }
 
   ngOnInit(): void {
-    // this.store.select(selectToken).subscribe(isVisible => this.isVisible = !isVisible);
+
   }
 
 
@@ -59,33 +57,6 @@ export class SignupComponent implements OnInit {
     }
 
     alert('Please, input required values before submit!');
-
-
-    //   const { email, password } = this.loginForm.value;
-
-    //   this.http.post(this.URL, { email, password }).subscribe(
-    //     {
-    //       next: (responseData) => {
-    //         // console.log(responseData);
-
-
-    //         this.loginForm.reset();
-
-    //         const { token, email } = responseData as Response;
-
-    //         this.store.dispatch(addUser({ token, email }));
-
-    //         this.router.navigateByUrl('/boards');
-
-    //       },
-    //       error: (err) => console.log(err.error.message)
-    //     }
-    //   );
-
-    //   return
-    // }
-
-    // alert('Please, input required values before submit!');
 
   }
 
