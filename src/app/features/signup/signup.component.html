@@ -1,0 +1,17 @@
+<div class="container">
+    <form (ngSubmit)="onSignup()" #f="ngForm" *ngIf="isVisible">
+        <h3 class="form-title">Signup</h3>
+        <label for="email">E-mail</label>
+        <input type="email" name="email" autocomplete="off" required ngModel>
+        <label for="password">Password</label>
+        <input type="password" name="password" autocomplete="off" required ngModel>
+        <label for="repassword">Repeat the password</label>
+        <input type="password" name="repassword" autocomplete="off" required ngModel>
+
+        <div class="btn-wrapper">
+            <a class="signup-link" routerLink="/login">Login</a>
+            <app-button text="Signup" btnType="submit"></app-button>
+
+        </div>
+    </form>
+</div>

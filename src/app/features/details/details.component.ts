@@ -8,8 +8,8 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { DetailsItem } from './details.reducer';
 import * as detailsActions from './details.actions';
 import * as detailsSelector from './details.selectors';
-import { getToken, selectToken } from '../dashboard/dashboard.selectors';
-import { GlobalState } from 'src/store/models/login.model';
+import { getValue, selectToken } from '../dashboard/dashboard.selectors';
+import { GlobalState } from 'src/store/models/store.model';
 import { DashboardService } from '../dashboard/dashboard.service';
 import { DetailsService } from './details.service';
 import * as dashboardSelectors from '../dashboard/dashboard.selectors';
@@ -36,7 +36,7 @@ export class DetailsComponent implements OnInit {
 
   boardId: string = '';
 
-  auth_token = getToken(this.store.select(selectToken));
+  auth_token = getValue(this.store.select(selectToken));
 
   constructor(
     private store: Store<GlobalState>,
@@ -50,26 +50,16 @@ export class DetailsComponent implements OnInit {
   ngOnInit(): void {
     this.boardName = this.dashBoardService.getBoardName();
 
-    const auth_token: string | null = getToken(this.store.select(selectToken));
+    this.getAllDetails();
 
-    let detailsAll: DetailsItem[] = [];
-
-    this.detailsService.getAllDetails(auth_token, this.BASE_URL + this.router.url)
-      .subscribe({
-        next: details => {
-          detailsAll = details;
-          this.store.dispatch(detailsActions.getDetails({ detailsAll }));
-
-          this.todoList = this.store.select(detailsSelector.selectDetailsTodo);
-          this.inProgressList = this.store.select(detailsSelector.selectDetailsInProgress);
-          this.doneList = this.store.select(detailsSelector.selectDetailsDone);
-        },
-        error: err => console.log(err)
-      });
   }
 
-  onFilterBtnClick() {
-    console.log("Hello1 in details!");
+  onFilterNameBtnClick(filterText: string) {
+    this.store.dispatch(detailsActions.filterByDetailName({ filterText }))
+  }
+
+  onDropFilterClick() {
+    this.getAllDetails();
   }
 
   onSortBtnClick() {
@@ -81,12 +71,12 @@ export class DetailsComponent implements OnInit {
   }
 
   onDscSortByDetailName() {
-    this.store.dispatch(detailsActions.dscSortByDetailName());
+    this.store.dispatch(detailsActions.descSortByDetailName());
   }
 
   onDragEnd() {
 
-    const auth_token = dashboardSelectors.getToken(this.store.select(dashboardSelectors.selectToken));
+    const auth_token = dashboardSelectors.getValue(this.store.select(dashboardSelectors.selectToken));
     const patchURL = this.BASE_URL + this.router.url + '/' + this.taskListService.getDraggingDetail()._id;
 
     let newStatus: Status = 'todo';
@@ -111,7 +101,7 @@ export class DetailsComponent implements OnInit {
 
   archivingTask(idTask: string) {
     console.log('Click archivingTask!');
-    const auth_token = dashboardSelectors.getToken(this.store.select(dashboardSelectors.selectToken));
+    const auth_token = dashboardSelectors.getValue(this.store.select(dashboardSelectors.selectToken));
     console.log(auth_token);
     const patchURL = this.BASE_URL + this.router.url + '/' + idTask;
     const newStatus: Status = 'archived';
@@ -128,5 +118,24 @@ export class DetailsComponent implements OnInit {
       error: err => console.log(err)
     });
 
+  }
+
+  getAllDetails() {
+    const auth_token: string | null = getValue(this.store.select(selectToken));
+
+    // let detailsAll: DetailsItem[] = [];
+
+    this.detailsService.getAllDetails(auth_token, this.BASE_URL + this.router.url)
+      .subscribe({
+        next: detailsAll => {
+          // detailsAll = details;
+          this.store.dispatch(detailsActions.getDetails({ detailsAll }));
+
+          this.todoList = this.store.select(detailsSelector.selectDetailsTodo);
+          this.inProgressList = this.store.select(detailsSelector.selectDetailsInProgress);
+          this.doneList = this.store.select(detailsSelector.selectDetailsDone);
+        },
+        error: err => console.log(err)
+      });
   }
 }

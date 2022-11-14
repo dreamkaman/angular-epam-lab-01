@@ -66,6 +66,14 @@ export const boardsReducer = createReducer<BoardState>(
         sortedBoards.sort((a, b) => (new Date(b.creationDate)).getTime() - (new Date(a.creationDate)).getTime());
         return { ...state, boards: sortedBoards };
     }),
+    on(boardActions.filterBoardName, (state, { filterText }) => {
+        const copyBoards: BoardItem[] = [...state.boards];
+
+        return {
+            ...state,
+            boards: [...copyBoards.filter(item => item.name.toLocaleUpperCase().includes(filterText.toLocaleUpperCase()))]
+        }
+    }),
     on(boardActions.clearBoards, (state) => ({ ...state, boards: [] }))
 
 );

@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 import { clearBoards } from 'src/app/features/dashboard/dashboard.actions';
 import { selectToken } from 'src/app/features/dashboard/dashboard.selectors';
 import { clearToken } from 'src/app/features/login/login.actions';
-import { GlobalState } from 'src/store/models/login.model';
-import { getToken } from 'src/app/features/dashboard/dashboard.selectors';
+import { GlobalState } from 'src/store/models/store.model';
+import { getValue } from 'src/app/features/dashboard/dashboard.selectors';
 import { clearDetails } from 'src/app/features/details/details.actions';
 
 @Component({
@@ -21,6 +21,8 @@ export class HeaderComponent implements OnInit {
 
   URL = 'http://localhost:4000/api/users/logout';
 
+  userName: string = '';
+
   constructor(private store: Store<GlobalState>, private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -30,10 +32,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogOut() {
-    // const auth_token = getToken(this.store.select(selectToken));
-    const auth_token = getToken(this.isLogined);
-
-    // console.log(auth_token);
+    const auth_token = getValue(this.isLogined);
 
     this.http.get(this.URL, {
       headers: {

@@ -1,13 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router'
 
-import { addToken } from './login.actions';
+import { addUser } from './login.actions';
 import { LoginService } from './login.service';
-import { GlobalState } from 'src/store/models/login.model';
-import { Observable } from 'rxjs';
+import { GlobalState } from 'src/store/models/store.model';
 import { selectToken } from '../dashboard/dashboard.selectors';
 
 export interface Response {
@@ -30,7 +28,10 @@ export class LoginComponent implements OnInit {
 
   URL: string = 'http://localhost:4000/api/auth/login';
 
-  constructor(private http: HttpClient, private store: Store<GlobalState>, private router: Router) { }
+  constructor(
+    private loginService: LoginService,
+    private store: Store<GlobalState>,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.store.select(selectToken).subscribe(isVisible => this.isVisible = !isVisible);
@@ -43,17 +44,15 @@ export class LoginComponent implements OnInit {
 
       const { email, password } = this.loginForm.value;
 
-      this.http.post(this.URL, { email, password }).subscribe(
+      this.loginService.loginUser(email, password).subscribe(
         {
           next: (responseData) => {
-            // console.log(responseData);
-
 
             this.loginForm.reset();
 
-            const { token } = responseData as Response;
+            const { token, email } = responseData as Response;
 
-            this.store.dispatch(addToken({ token }));
+            this.store.dispatch(addUser({ token, email }));
 
             this.router.navigateByUrl('/boards');
 

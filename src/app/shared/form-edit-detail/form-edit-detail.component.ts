@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { GlobalState } from 'src/store/models/login.model';
+import { GlobalState } from 'src/store/models/store.model';
 import { ContextMenuService } from '../context-menu/context-menu.service';
 import { ModalWindowService } from '../modal-window/modal-window.service';
 import { TaskService } from '../task/task.service';
@@ -59,7 +59,7 @@ export class FormEditDetailComponent implements OnInit {
     console.log('onOkSubmit click!');
     console.log(this.editDetailForm.value);
     // this.taskId = this.taskService.getIdTask();
-    const auth_token = dashboardSelectors.getToken(this.store.select(dashboardSelectors.selectToken));
+    const auth_token = dashboardSelectors.getValue(this.store.select(dashboardSelectors.selectToken));
     const patchURL = this.BASE_URL + this.router.url + '/' + this.taskService.getIdTask();
     const { name: newName } = this.editDetailForm.value;
 

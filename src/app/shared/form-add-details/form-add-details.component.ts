@@ -2,10 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
-import { getToken, selectToken } from 'src/app/features/dashboard/dashboard.selectors';
+import { getValue, selectToken } from 'src/app/features/dashboard/dashboard.selectors';
 import { DashboardService } from 'src/app/features/dashboard/dashboard.service';
 import { DetailsService } from 'src/app/features/details/details.service';
-import { GlobalState } from 'src/store/models/login.model';
+import { GlobalState } from 'src/store/models/store.model';
 import { ModalWindowService } from '../modal-window/modal-window.service';
 import { Status, TasksListService } from '../tasks-list/tasks-list.service';
 import * as detailsActions from '../../features/details/details.actions';
@@ -37,7 +37,7 @@ export class FormAddDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.auth_token = getToken(this.store.select(selectToken));
+    this.auth_token = getValue(this.store.select(selectToken));
 
     this.status = this.tasksListService.getStatus();
 

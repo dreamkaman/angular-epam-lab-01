@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { DashboardService, IFormData } from 'src/app/features/dashboard/dashboard.service';
-import { GlobalState } from 'src/store/models/login.model';
+import { GlobalState } from 'src/store/models/store.model';
 import { ModalWindowService } from '../modal-window/modal-window.service';
 import * as dashboardActions from '../../features/dashboard/dashboard.actions';
 import { FormEditBoardService } from './form-edit-board.service';

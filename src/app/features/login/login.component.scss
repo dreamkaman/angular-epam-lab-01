@@ -19,6 +19,11 @@ form {
   box-shadow: 5px 5px 10px 0px rgb(185, 185, 185);
 }
 
+.form-title {
+  margin-bottom: 10px;
+  color: #1976d2;
+}
+
 input {
   width: 100%;
 }
@@ -35,4 +40,28 @@ label {
   margin-bottom: 1px;
   align-self: flex-start;
   font-weight: 500;
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.signup-link {
+  max-width: 100%;
+  padding: 7px 21px;
+  margin-left: 10px;
+  font-size: 15px;
+  border-radius: 5px;
+  font-family: "Roboto", sans-serif;
+  color: white;
+  border: transparent;
+  background-color: #1976d2;
+  box-shadow: 2px 2px 3px 0px rgb(185, 185, 185);
+  cursor: pointer;
+}
+
+.signup-link:hover {
+  background-color: #0d5398;
 }

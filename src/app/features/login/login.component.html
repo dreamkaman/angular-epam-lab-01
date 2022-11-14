@@ -1,13 +1,17 @@
 <!-- <form #authForm="ngForm"> -->
 <div class="container">
     <form (ngSubmit)="onLogin()" #f="ngForm" *ngIf="isVisible">
+        <h3 class="form-title">Login</h3>
         <label for="email">E-mail</label>
-        <input type="email" name="email" autocomplete="false" required ngModel>
+        <input type="email" name="email" autocomplete="off" required ngModel>
         <label for="password">Password</label>
-        <input type="password" name="password" autocomplete="false" required ngModel>
+        <input type="password" name="password" autocomplete="off" required ngModel>
 
         <!-- <app-input inputName="email" inputType="email" inputTitle="E-mail"></app-input>
         <app-input inputName="password" inputType="password" inputTitle="Password"></app-input> -->
-        <app-button text="Log in" btnType="submit"></app-button>
+        <div class="btn-wrapper">
+            <app-button text="Log in" btnType="submit"></app-button>
+            <a class="signup-link" routerLink="/signup">Signup</a>
+        </div>
     </form>
 </div>

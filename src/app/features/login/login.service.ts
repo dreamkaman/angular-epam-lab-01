@@ -6,7 +6,9 @@ import { Injectable } from '@angular/core';
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient
+  ) {
   }
 
   loginUser(email: string, password: string) {

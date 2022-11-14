@@ -15,6 +15,7 @@ export class ModalWindowComponent implements OnInit {
   isEditBoardModalVisible$: Observable<boolean> = new Observable<false>;
   isAddDetailModalVisible$: Observable<boolean> = new Observable<false>;
   isEditDetailModalVisible$: Observable<boolean> = new Observable<false>;
+  isAddCommentModalVisible$: Observable<boolean> = new Observable<false>;
 
 
   constructor(
@@ -30,6 +31,8 @@ export class ModalWindowComponent implements OnInit {
     this.isAddDetailModalVisible$ = this.modalWindowService.watchAddDetail();
 
     this.isEditDetailModalVisible$ = this.modalWindowService.watchEditDetail();
+
+    this.isAddCommentModalVisible$ = this.modalWindowService.watchAddComment();
   }
 
 

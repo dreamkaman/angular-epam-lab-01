@@ -1,8 +1,4 @@
 .task-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
   width: 100%;
 
   padding: 5px;
@@ -14,7 +10,25 @@
   cursor: move;
 }
 
-.archive {
+.text-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.btn-item:not(:last-child) {
+  margin-right: 5px;
+}
+
+.archive,
+.comment {
   width: 20px;
   height: 20px;
   padding: 2px;
@@ -30,4 +44,19 @@
   padding: 0 5px;
   overflow: hidden;
   text-align: left;
+}
+
+.comments-list {
+  list-style: none;
+  padding: 10px 0 0;
+}
+
+.comments-list-item {
+  padding: 10px 5px;
+  border: 1px solid black;
+  background-color: rgb(255, 255, 230);
+}
+
+.comments-list-item:not(:last-child) {
+  margin-bottom: 5px;
 }

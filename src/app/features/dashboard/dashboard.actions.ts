@@ -23,4 +23,4 @@ export const ascSortingByBoardName = createAction(ASC_SORTING_BOARD_NAME);
 export const dscSortingByBoardName = createAction(DSC_SORTING_BOARD_NAME);
 export const ascSortingByBoardDate = createAction(ASC_SORTING_BOARD_DATE);
 export const dscSortingByBoardDate = createAction(DSC_SORTING_BOARD_DATE);
-export const filterBoardName = createAction(FILTER_NAME, props<{ filterValue: string }>());
+export const filterBoardName = createAction(FILTER_NAME, props<{ filterText: string }>());

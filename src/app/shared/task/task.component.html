@@ -1,11 +1,31 @@
 <div [id]="idTask" class="task-item">
-    <button class="archive" type="button" (click)="taskEmitter.emit(idTask)">
-        <img src="../../../assets/images/archive-blue.png" alt="Archive button">
-    </button>
 
-    <p class="task-name">{{taskName}}</p>
-
-    <app-menu-button [id]="idTask"></app-menu-button>
+    <div class="text-wrapper">
+        <p class="task-name">{{taskName}}</p>
+        <app-menu-button [id]="idTask"></app-menu-button>
+    </div>
+    <div class="btn-wrapper">
+        <button class="btn-item archive" type="button" (click)="taskEmitter.emit(idTask)">
+            <img src="../../../assets/images/archive-blue-2.png" alt="Archive icon">
+        </button>
+        <button class="btn-item comment" type="button">
+            <img src="../../../assets/images/add-comment-blue.png" alt="Add comment icon">
+        </button>
+    </div>
+    <ul class="comments-list">
+        <li class="comments-list-item">
+            <app-comment></app-comment>
+        </li>
+        <li class="comments-list-item">
+            <app-comment></app-comment>
+        </li>
+        <li class="comments-list-item">
+            <app-comment></app-comment>
+        </li>
+        <li class="comments-list-item">
+            <app-comment></app-comment>
+        </li>
+    </ul>
 
 
 </div>

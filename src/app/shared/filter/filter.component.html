@@ -1,0 +1,10 @@
+<form class="filter-form" (ngSubmit)="onFilterSubmit()" #f="ngForm">
+    <input class="filter-text" type="text" name="filterText" placeholder="Input filter text" [value]="filterText"
+        (input)="onChangeFilter()" autocomplete="off" ngModel>
+    <button class="filter-btn" type="submit" (click)="filterEmitter.emit(filterText)">
+        <img src="../../../assets/images/loupe-wt.png" alt="Loupe icon">
+    </button>
+    <button class="filter-btn" type="submit" (click)="dropFilterEmitter.emit()">
+        <img src="../../../assets/images/drop-filter-wt.png" alt="Drop filter icon">
+    </button>
+</form>

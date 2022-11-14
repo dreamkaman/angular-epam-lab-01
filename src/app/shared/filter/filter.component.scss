@@ -1,0 +1,40 @@
+.filter-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 300px;
+}
+
+.filter-text {
+  width: 85%;
+  padding: 5px;
+  font-size: 15px;
+  border: 2px solid #1976d2;
+  border-radius: 5px;
+  color: #1976d2;
+  box-shadow: 2px 2px 3px 0px rgb(185, 185, 185);
+}
+
+.filter-text::placeholder {
+  color: #85c2ff;
+}
+
+.filter-btn {
+  width: 32px;
+  height: 32px;
+  padding: 6px;
+  margin-left: 3px;
+
+  //   border: 1px solid #1976d2;
+  box-shadow: 2px 2px 3px 0px rgb(185, 185, 185);
+  border: none;
+  border-radius: 5px;
+  background-color: #1976d2;
+
+  cursor: pointer;
+}
+
+.filter-btn:hover {
+  background-color: #0d5398;
+}

@@ -32,8 +32,11 @@ import { ButtonsBlockComponent } from './shared/buttons-block/buttons-block.comp
 import { FormEditBoardComponent } from './shared/form-edit-board/form-edit-board.component';
 import { FormAddDetailsComponent } from './shared/form-add-details/form-add-details.component';
 import { FormEditDetailComponent } from './shared/form-edit-detail/form-edit-detail.component';
-// import { EffectsModule } from '@ngrx/effects';
-// import { DashboardEffects } from '../app/features/dashboard/dashboard.effects';
+import { FilterComponent } from './shared/filter/filter.component';
+import { SignupComponent } from './features/signup/signup.component';
+import { FormAddCommentComponent } from './shared/form-add-comment/form-add-comment.component';
+import { CommentComponent } from './shared/comment/comment.component';
+
 
 
 @NgModule({
@@ -58,7 +61,11 @@ import { FormEditDetailComponent } from './shared/form-edit-detail/form-edit-det
     ButtonsBlockComponent,
     FormEditBoardComponent,
     FormAddDetailsComponent,
-    FormEditDetailComponent
+    FormEditDetailComponent,
+    FilterComponent,
+    SignupComponent,
+    FormAddCommentComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +77,6 @@ import { FormEditDetailComponent } from './shared/form-edit-detail/form-edit-det
       maxAge: 25,
       logOnly: environment.production
     }),
-    // EffectsModule.forRoot([DashboardEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 import { ModalWindowService } from 'src/app/shared/modal-window/modal-window.service';
 
 import { BoardItem } from './dashboard.reducer';
-import { getToken, selectToken, selectBoards } from './dashboard.selectors';
+import { getValue, selectToken, selectBoards } from './dashboard.selectors';
 
 import { DashboardService } from './dashboard.service';
-import { GlobalState } from 'src/store/models/login.model';
+import { GlobalState } from 'src/store/models/store.model';
 import * as dashboardActions from '../dashboard/dashboard.actions';
 
 @Component({
@@ -20,7 +20,7 @@ export class DashboardComponent implements
   OnInit {
   @Input() boards: Observable<BoardItem[]> = this.store.select(selectBoards);
 
-  auth_token = getToken(this.store.select(selectToken));
+  auth_token = getValue(this.store.select(selectToken));
 
 
   constructor(private store: Store<GlobalState>,
@@ -30,14 +30,7 @@ export class DashboardComponent implements
 
   ngOnInit(): void {
 
-    this.dashBoardService.getAllBoards(this.auth_token)
-      .subscribe({
-        next: responseData => {
-          const boards = responseData;
-          this.store.dispatch(dashboardActions.getAllBoards({ boards }));
-        },
-        error: err => console.log(err)
-      });
+    this.getAllBoards();
   }
 
 
@@ -61,6 +54,14 @@ export class DashboardComponent implements
     console.log("Hello2!");
   }
 
+  onFilterClick(filterText: string) {
+    this.store.dispatch(dashboardActions.filterBoardName({ filterText }));
+  }
+
+  onFilterDrop() {
+    this.getAllBoards();
+  }
+
   onAscSortingByName() {
     this.store.dispatch(dashboardActions.ascSortingByBoardName());
   }
@@ -75,5 +76,16 @@ export class DashboardComponent implements
 
   onDscSortingByDate() {
     this.store.dispatch(dashboardActions.dscSortingByBoardName());
+  }
+
+  getAllBoards() {
+    this.dashBoardService.getAllBoards(this.auth_token)
+      .subscribe({
+        next: responseData => {
+          const boards = responseData;
+          this.store.dispatch(dashboardActions.getAllBoards({ boards }));
+        },
+        error: err => console.log(err)
+      });
   }
 }

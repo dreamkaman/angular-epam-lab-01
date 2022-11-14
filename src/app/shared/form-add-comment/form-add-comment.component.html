@@ -1,0 +1,9 @@
+<form (ngSubmit)="onOkSubmit()" #f="ngForm">
+    <h3 class="form-title">Add comment</h3>
+    <label for="name">Comment text</label>
+    <textarea rows="5" cols="1" name="name" required ngModel></textarea>
+    <div class="btn-wrapper">
+        <app-button class="btn-item" text="Edit" btnType="Submit"></app-button>
+        <app-button class="btn-item" text="Close" (clickEmitter)="onCloseBtnClick()"></app-button>
+    </div>
+</form>

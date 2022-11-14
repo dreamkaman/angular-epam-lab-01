@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, ViewChildren, QueryList, ElementRef, 
 import { Store } from '@ngrx/store';
 import { Observable, fromEvent, throttle, throttleTime, debounceTime, distinctUntilChanged, last, first } from 'rxjs';
 import { DetailsItem } from 'src/app/features/details/details.reducer';
-import { GlobalState } from 'src/store/models/login.model';
+import { GlobalState } from 'src/store/models/store.model';
 import { ModalWindowService } from '../modal-window/modal-window.service';
 import { Status, TasksListService } from './tasks-list.service';
 import * as detailsActions from '../../features/details/details.actions';

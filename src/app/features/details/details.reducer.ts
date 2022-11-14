@@ -2,6 +2,7 @@ import * as detailsActions from './details.actions';
 
 import { createReducer, on } from '@ngrx/store';
 import { Status } from 'src/app/shared/tasks-list/tasks-list.service';
+import { state } from '@angular/animations';
 //import * as boardActions from './dashboard.actions';
 
 
@@ -128,8 +129,7 @@ export const detailsReducer = createReducer(
         }
     }),
     on(detailsActions.ascSortByDetailName, (state) => {
-        const sortedState = {
-            ...state,
+        const copyState = {
             todo: [...state.todo],
             inProgress: [...state.inProgress],
             done: [...state.done],
@@ -137,17 +137,18 @@ export const detailsReducer = createReducer(
         }
 
         return {
-            todo: sortedState.todo.sort((a, b) => a.name.localeCompare(b.name)),
-            inProgress: sortedState.inProgress.sort((a, b) => a.name.localeCompare(b.name)),
-            done: sortedState.done.sort((a, b) => a.name.localeCompare(b.name)),
-            archived: sortedState.archived
+            // ...state,
+            todo: copyState.todo.sort((a, b) => a.name.localeCompare(b.name)),
+            inProgress: copyState.inProgress.sort((a, b) => a.name.localeCompare(b.name)),
+            done: copyState.done.sort((a, b) => a.name.localeCompare(b.name)),
+            archived: copyState.archived
         }
 
     }
     ),
-    on(detailsActions.dscSortByDetailName, (state) => {
-        const sortedState = {
-            ...state,
+    on(detailsActions.descSortByDetailName, (state) => {
+
+        const copyState = {
             todo: [...state.todo],
             inProgress: [...state.inProgress],
             done: [...state.done],
@@ -155,17 +156,16 @@ export const detailsReducer = createReducer(
         }
 
         return {
-            todo: sortedState.todo.sort((a, b) => a.name.localeCompare(b.name)),
-            inProgress: sortedState.inProgress.sort((a, b) => b.name.localeCompare(a.name)),
-            done: sortedState.done.sort((a, b) => a.name.localeCompare(b.name)),
-            archived: sortedState.archived
+            todo: copyState.todo.sort((a, b) => b.name.localeCompare(a.name)),
+            inProgress: copyState.inProgress.sort((a, b) => b.name.localeCompare(a.name)),
+            done: copyState.done.sort((a, b) => b.name.localeCompare(a.name)),
+            archived: copyState.archived
         }
 
     }
     ),
     on(detailsActions.ascSortByDetailDate, (state) => {
-        const sortedState = {
-            ...state,
+        const copyState = {
             todo: [...state.todo],
             inProgress: [...state.inProgress],
             done: [...state.done],
@@ -173,15 +173,14 @@ export const detailsReducer = createReducer(
         }
 
         return {
-            todo: sortedState.todo.sort((a, b) => (new Date(a.createdAt)).getTime() - (new Date(b.createdAt)).getTime()),
-            inProgress: sortedState.inProgress.sort((a, b) => (new Date(a.createdAt)).getTime() - (new Date(b.createdAt)).getTime()),
-            done: sortedState.done.sort((a, b) => (new Date(a.createdAt)).getTime() - (new Date(b.createdAt)).getTime()),
-            archived: sortedState.archived
+            todo: copyState.todo.sort((a, b) => (new Date(a.createdAt)).getTime() - (new Date(b.createdAt)).getTime()),
+            inProgress: copyState.inProgress.sort((a, b) => (new Date(a.createdAt)).getTime() - (new Date(b.createdAt)).getTime()),
+            done: copyState.done.sort((a, b) => (new Date(a.createdAt)).getTime() - (new Date(b.createdAt)).getTime()),
+            archived: copyState.archived
         }
     }),
-    on(detailsActions.dscSortByDetailDate, (state) => {
-        const sortedState = {
-            ...state,
+    on(detailsActions.descSortByDetailDate, (state) => {
+        const copyState = {
             todo: [...state.todo],
             inProgress: [...state.inProgress],
             done: [...state.done],
@@ -189,11 +188,37 @@ export const detailsReducer = createReducer(
         }
 
         return {
-            todo: sortedState.todo.sort((a, b) => (new Date(b.createdAt)).getTime() - (new Date(a.createdAt)).getTime()),
-            inProgress: sortedState.inProgress.sort((a, b) => (new Date(b.createdAt)).getTime() - (new Date(a.createdAt)).getTime()),
-            done: sortedState.done.sort((a, b) => (new Date(b.createdAt)).getTime() - (new Date(a.createdAt)).getTime()),
-            archived: sortedState.archived
+            todo: copyState.todo.sort((a, b) => (new Date(b.createdAt)).getTime() - (new Date(a.createdAt)).getTime()),
+            inProgress: copyState.inProgress.sort((a, b) => (new Date(b.createdAt)).getTime() - (new Date(a.createdAt)).getTime()),
+            done: copyState.done.sort((a, b) => (new Date(b.createdAt)).getTime() - (new Date(a.createdAt)).getTime()),
+            archived: copyState.archived
         }
     }),
-    on(detailsActions.clearDetails, (_state) => ({ todo: [], inProgress: [], done: [], archived: [] }))
+    on(detailsActions.filterByDetailName, (state, { filterText }) => {
+        return {
+            ...state,
+            todo: [...state.todo.filter(item => {
+                return item.name.toUpperCase().includes(filterText.toUpperCase());
+                // item.name.includes(filterTxt);
+            })],
+            inProgress: [...state.inProgress.filter(item => {
+                return item.name.toUpperCase().includes(filterText.toUpperCase());
+                // item.name.includes(filterTxt);
+            })],
+            done: [...state.done.filter(item => {
+                return item.name.toUpperCase().includes(filterText.toUpperCase());
+                // item.name.includes(filterTxt);
+            })],
+            archived: [...state.archived]
+        }
+    }),
+    on(detailsActions.clearDetails, (state) => {
+        return {
+            ...state,
+            todo: [],
+            inProgress: [],
+            done: [],
+            archived: []
+        }
+    })
 );

@@ -15,3 +15,8 @@
     (click)="onEditDetailBackdropClick($event)">
     <app-form-edit-detail></app-form-edit-detail>
 </div>
+
+<div class="backdrop" *ngIf="isAddCommentModalVisible$|async as isAddCommentModalVisible"
+    (click)="onEditDetailBackdropClick($event)">//!!!!!!!!!!!!!!!!!!!!
+    <app-form-add-comment></app-form-add-comment>
+</div>

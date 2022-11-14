@@ -1,6 +1,6 @@
 .container {
   min-height: 90vh;
-  padding: 30px;
+  padding: 50px;
 
   background-color: beige;
   border-top: 2px solid white;
@@ -10,6 +10,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.buttons-list-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .add-button-wrapper {

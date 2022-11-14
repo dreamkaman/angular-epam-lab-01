@@ -3,7 +3,8 @@
         <h3>{{boardName}}</h3>
         <ul class="buttons-list">
             <li>
-                <app-button (clickEmitter)="onFilterBtnClick()" text="Filter"></app-button>
+                <app-filter (filterEmitter)="onFilterNameBtnClick($event)" (dropFilterEmitter)="onDropFilterClick()">
+                </app-filter>
             </li>
             <li>
                 <app-button (clickEmitter)="onSortBtnClick()" text="Sort by dropdown"></app-button>

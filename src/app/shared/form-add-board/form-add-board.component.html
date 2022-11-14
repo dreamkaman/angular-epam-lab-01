@@ -1,6 +1,7 @@
 <form (ngSubmit)="onOkSubmit()" #f="ngForm">
+    <h3 class="form-title">Add board</h3>
     <label for="name">Name of the board</label>
-    <input type="text" name="name" autocomplete="false" required ngModel>
+    <input type="text" name="name" autocomplete="off" required ngModel>
     <label for="description">Description</label>
     <textarea rows="5" cols="1" name="description" required ngModel></textarea>
     <div class="btn-wrapper">

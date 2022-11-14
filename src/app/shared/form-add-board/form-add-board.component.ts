@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { getToken, selectToken } from 'src/app/features/dashboard/dashboard.selectors';
+import { getValue, selectToken } from 'src/app/features/dashboard/dashboard.selectors';
 import { DashboardService } from 'src/app/features/dashboard/dashboard.service';
-import { GlobalState } from 'src/store/models/login.model';
+import { GlobalState } from 'src/store/models/store.model';
 
 import { ModalWindowService } from '../modal-window/modal-window.service';
 import * as dashboardActions from '../../features/dashboard/dashboard.actions';

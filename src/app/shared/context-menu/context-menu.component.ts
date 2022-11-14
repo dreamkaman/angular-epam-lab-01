@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { DetailsService } from 'src/app/features/details/details.service';
 import { TaskService } from '../task/task.service';
 import * as dashboardSelectors from '../../features/dashboard/dashboard.selectors';
-import { GlobalState } from 'src/store/models/login.model';
+import { GlobalState } from 'src/store/models/store.model';
 import * as detailsAction from '../../features/details/details.actions';
 import { ModalWindowService } from '../modal-window/modal-window.service';
 import { ContextMenuService } from './context-menu.service';
@@ -42,7 +42,7 @@ export class ContextMenuComponent implements OnInit {
   }
 
   onDelete() {
-    const auth_token = dashboardSelectors.getToken(this.store.select(dashboardSelectors.selectToken));
+    const auth_token = dashboardSelectors.getValue(this.store.select(dashboardSelectors.selectToken));
     const delURL = this.BASE_URL + this.router.url + '/' + this.idTask;
 
     this.detailsService.deleteDetail(auth_token, delURL)

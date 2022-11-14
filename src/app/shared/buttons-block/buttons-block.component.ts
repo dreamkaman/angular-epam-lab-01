@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { BoardItem } from 'src/app/features/dashboard/dashboard.reducer';
 import { DashboardService } from 'src/app/features/dashboard/dashboard.service';
 import { DetailsService } from 'src/app/features/details/details.service';
-import { GlobalState } from 'src/store/models/login.model';
+import { GlobalState } from 'src/store/models/store.model';
 import * as dashboardActions from '../../features/dashboard/dashboard.actions';
 import { FormEditBoardService } from '../form-edit-board/form-edit-board.service';
 import { ModalWindowService } from '../modal-window/modal-window.service';

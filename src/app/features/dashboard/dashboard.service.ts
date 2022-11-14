@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { GlobalState } from 'src/store/models/login.model';
+import { GlobalState } from 'src/store/models/store.model';
 import { BoardItem } from './dashboard.reducer';
-import { getToken, selectToken } from './dashboard.selectors';
+import { getValue, selectToken } from './dashboard.selectors';
 
 export interface IFormData {
   name: string,
@@ -43,7 +43,7 @@ export class DashboardService {
   }
 
   addBoard(data: IFormData) {
-    const auth_token = getToken(this.store.select(selectToken));
+    const auth_token = getValue(this.store.select(selectToken));
 
     return this.http.post(
       this.BASE_URL,
@@ -58,7 +58,7 @@ export class DashboardService {
   }
 
   deleteBoard(boardId: string) {
-    const auth_token = getToken(this.store.select(selectToken));
+    const auth_token = getValue(this.store.select(selectToken));
 
     const delURL = this.BASE_URL + '/' + boardId;
 
@@ -73,7 +73,7 @@ export class DashboardService {
   }
 
   patchBoard(boardId: string, formData: IFormData): Observable<BoardItem> {
-    const auth_token = getToken(this.store.select(selectToken));
+    const auth_token = getValue(this.store.select(selectToken));
 
     const editURL = this.BASE_URL + '/' + boardId;
 

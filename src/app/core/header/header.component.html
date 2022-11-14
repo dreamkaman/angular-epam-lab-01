@@ -1,15 +1,17 @@
 <header>
-    <a class="left-wrapper" routerLink="/login">
-        <img class="logo-angular" src="../../../assets/images/angular.png" alt="angular">
-        <p>Welcome!</p>
-    </a>
     <nav class="navigation">
-        <a class="nav-link" routerLink="/login" *ngIf="isLogined|async">Home</a>
-        <a class="nav-link" routerLink="/boards" *ngIf="isLogined|async">Show dashboard</a>
+        <a class="left-wrapper" routerLink="/login">
+            <img class="logo-angular" src="../../../assets/images/angular.png" alt="angular">
+            <p>Welcome!</p>
+        </a>
+        <div class="menu">
+            <a class="nav-link" routerLink="/login" *ngIf="isLogined|async">Home</a>
+            <a class="nav-link" routerLink="/boards" *ngIf="isLogined|async">Dashboard</a>
+        </div>
     </nav>
     <div class="right-wrapper" *ngIf="isLogined|async">
         <div class="avatar-wrapper">
-            <app-avatar> </app-avatar>
+            <app-avatar [userName]="userName"> </app-avatar>
         </div>
         <app-button text="Log out" (clickEmitter)="onLogOut()"></app-button>
     </div>
