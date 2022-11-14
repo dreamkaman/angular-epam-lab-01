@@ -105,8 +105,8 @@ export class DashboardComponent implements
   getAllBoards() {
     this.dashBoardService.getAllBoards(this.auth_token)
       .subscribe({
-        next: responseData => {
-          const boards = responseData;
+        next: boards => {
+          // const boards = responseData;
           this.store.dispatch(dashboardActions.getAllBoards({ boards }));
         },
         error: err => console.log(err)

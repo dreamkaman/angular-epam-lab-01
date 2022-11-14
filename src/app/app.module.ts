@@ -36,6 +36,7 @@ import { FilterComponent } from './shared/filter/filter.component';
 import { SignupComponent } from './features/signup/signup.component';
 import { FormAddCommentComponent } from './shared/form-add-comment/form-add-comment.component';
 import { CommentComponent } from './shared/comment/comment.component';
+import { commentsReducer } from './shared/task/task.reducer';
 
 
 
@@ -72,7 +73,7 @@ import { CommentComponent } from './shared/comment/comment.component';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot({ user: loginReducer, dashboard: boardsReducer, details: detailsReducer }),
+    StoreModule.forRoot({ user: loginReducer, dashboard: boardsReducer, details: detailsReducer, comments: commentsReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production

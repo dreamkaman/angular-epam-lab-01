@@ -1,4 +1,12 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+
+import { GlobalState } from 'src/store/models/store.model';
+import { getValue, selectToken } from '../../features/dashboard/dashboard.selectors';
+import { CommentItem, CommentsState } from './task.reducer';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +16,12 @@ export class TaskService {
 
   destination: string = '';
 
-  constructor() { }
+  BASE_URL = 'http://localhost:4000/api/boards';
+
+  constructor(
+    private http: HttpClient,
+    private store: Store<GlobalState>,
+    private router: Router) { }
 
   getIdTask() {
     return this.idTask;
@@ -24,5 +37,19 @@ export class TaskService {
 
   setDestination(newDestination: string) {
     this.destination = newDestination;
+  }
+
+  getAllComments() {
+    const getURL = this.BASE_URL + this.router.url + '/' + this.idTask;
+    const auth_token = getValue(this.store.select(selectToken));
+
+    return this.http.get(
+      getURL,
+      {
+        headers: {
+          "Authorization": `Bearer ${auth_token}`
+        }
+      }
+    ) as Observable<CommentItem[]>;
   }
 }

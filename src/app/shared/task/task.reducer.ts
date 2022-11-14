@@ -1,8 +1,21 @@
+import { createReducer, on } from "@ngrx/store"
+import * as taskActions from './task.actions';
 
 export interface CommentItem {
     commentId: string,
     commentText: string,
-    taskId: string
+    detailId: string
 }
 
-export type CommentState = CommentItem[];
+export type CommentsState = {
+    comments: CommentItem[]
+}
+
+const initialState: CommentsState = {
+    comments: []
+}
+
+export const commentsReducer = createReducer<CommentsState>(
+    initialState,
+    on(taskActions.addAllComments, (_state, { comments }) => ({ comments: [...comments] }))
+)

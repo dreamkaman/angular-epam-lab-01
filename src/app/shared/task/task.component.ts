@@ -10,7 +10,8 @@ import { Status } from '../tasks-list/tasks-list.service';
 import * as detailsActions from '../../features/details/details.actions';
 import { Observable } from 'rxjs';
 import { selectComments } from './task.selectors';
-import { CommentState } from './task.reducer';
+import { CommentsState } from './task.reducer';
+import * as taskActions from './task.actions';
 
 @Component({
   selector: 'app-task',
@@ -24,8 +25,11 @@ export class TaskComponent implements OnInit {
 
   @Output() taskEmitter = new EventEmitter<string>;
   @Output() addCommentEmitter = new EventEmitter;
-  // comments: Observable<Comment[]> = this.store.select(selectComments);
-  comments: Observable<CommentState> = this.store.select(selectComments);
+
+  comments: Observable<CommentsState> = this.store.select(selectComments);
+
+  detailComments!: CommentsState;
+
 
 
   BASE_URL: string = 'http://localhost:4000/api';
@@ -42,6 +46,24 @@ export class TaskComponent implements OnInit {
   ngOnInit(): void {
     this.taskService.setIdTask(this.idTask);
     this.contextMenuService.setTaskName(this.taskName);
+
+    this.taskService.getAllComments()
+      .subscribe({
+        next: comments => {
+
+          this.store.dispatch(taskActions.addAllComments({ comments }))
+        }
+      })
+
+    this.comments.subscribe({
+      next: comments => {
+        console.log(comments);
+
+        // this.detailComments = comments.filter(item => item.detailId === this.idTask);
+        // console.log(this.detailComments);
+      },
+      error: err => console.log(err)
+    });
   }
 
 
