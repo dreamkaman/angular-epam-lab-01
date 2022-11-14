@@ -26,9 +26,11 @@ export class FormAddCommentComponent implements OnInit {
   onOkSubmit() {
     console.log(this.addCommentForm.value);
 
+    const idTask: string = this.taskService.getIdTask();
+
     const { text } = this.addCommentForm.value;
 
-    this.taskService.postComment(text)
+    this.taskService.postComment(text, idTask)
       .subscribe({
         next: comment => {
           this.store.dispatch(taskActions.addComment({ comment }));

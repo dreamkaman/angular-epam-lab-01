@@ -45,7 +45,9 @@ export class TaskComponent implements OnInit {
     this.getComments();
   }
 
-  onAddComment() {
+  onAddComment(idTask: string) {
+    this.taskService.setIdTask(idTask);
+
     this.modalWindowService.openAddComment();
   }
 

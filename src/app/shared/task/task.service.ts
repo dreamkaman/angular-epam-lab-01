@@ -53,8 +53,8 @@ export class TaskService {
     ) as Observable<CommentItem[]>;
   }
 
-  postComment(text: string) {
-    const postURL = this.BASE_URL + this.router.url + '/' + this.idTask + '/comments';
+  postComment(text: string, idTask: string) {
+    const postURL = this.BASE_URL + this.router.url + '/' + idTask + '/comments';
     const auth_token = getValue(this.store.select(selectToken));
     return this.http.post(
       postURL,
