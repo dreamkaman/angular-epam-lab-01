@@ -14,8 +14,8 @@
     </div>
 
     <ul class="comments-list">
-        <li class="comments-list-item" *ngFor="let comment of comments|async">
-            <app-comment [commentText]="comment.text" *ngIf="comment.detailId===idTask"></app-comment>
+        <li class="comments-list-item" *ngFor="let comment of comments|async|taskFilterSync:idTask">
+            <app-comment [commentText]="comment.text"></app-comment>
         </li>
     </ul>
 

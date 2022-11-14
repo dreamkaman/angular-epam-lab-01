@@ -28,8 +28,6 @@ export class TaskComponent implements OnInit {
 
   comments: Observable<CommentItem[]> = this.store.select(selectComments);
 
-  // commentsSync: CommentItem[] = [];
-
   BASE_URL: string = 'http://localhost:4000/api';
   destination: string = '';
 

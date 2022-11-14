@@ -6,9 +6,12 @@ import { CommentItem } from './task.reducer';
 })
 export class TaskFilterSyncPipe implements PipeTransform {
 
-  transform(comments: CommentItem[], detailId: string): any {
+  transform(comments: CommentItem[] | null, detailId: string): any {
 
-    return comments.filter(comment => comment.detailId === detailId);
+    if (comments) {
+      return comments.filter(comment => comment.detailId === detailId);
+    }
+    return null;
   }
 
 }
