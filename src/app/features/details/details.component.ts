@@ -38,6 +38,8 @@ export class DetailsComponent implements OnInit {
 
   auth_token = getValue(this.store.select(selectToken));
 
+  sortType: string = 'Sort by name';
+
   constructor(
     private store: Store<GlobalState>,
     private router: Router,
@@ -63,15 +65,41 @@ export class DetailsComponent implements OnInit {
   }
 
   onSortBtnClick() {
-    console.log("Hello2 in details!");
+    if (this.sortType === 'Sort by name') {
+      this.sortType = 'Sort by date';
+      return
+    }
+    this.sortType = 'Sort by name';
   }
 
   onAscSortByDetailName() {
     this.store.dispatch(detailsActions.ascSortByDetailName());
   }
 
-  onDscSortByDetailName() {
+  onDescSortByDetailName() {
     this.store.dispatch(detailsActions.descSortByDetailName());
+  }
+
+  onAscSortByDate() {
+    this.store.dispatch(detailsActions.ascSortByDetailDate());
+  }
+
+  onDescSortByDetailDate() {
+    this.store.dispatch(detailsActions.descSortByDetailDate());
+  }
+
+  onAscSort() {
+    switch (this.sortType) {
+      case 'Sort by name': this.onAscSortByDetailName(); break;
+      case 'Sort by date': this.onAscSortByDetailName(); break;
+    }
+  }
+
+  onDescSort() {
+    switch (this.sortType) {
+      case 'Sort by name': this.onDescSortByDetailName(); break;
+      case 'Sort by date': this.onDescSortByDetailName(); break;
+    }
   }
 
   onDragEnd() {

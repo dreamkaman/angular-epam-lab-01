@@ -6,13 +6,13 @@
                 <app-filter (filterEmitter)="onFilterClick($event)" (dropFilterEmitter)="onFilterDrop()"></app-filter>
             </li>
             <li class="buttons-list-item">
-                <app-button (clickEmitter)="clickHandler2()" text="Sort by dropdown"></app-button>
+                <app-button (clickEmitter)="onSetSortType()" [text]="sortType"></app-button>
             </li>
             <li class="buttons-list-item">
-                <app-button (clickEmitter)="onAscSortingByName()" text="ASC"></app-button>
+                <app-button (clickEmitter)="onAscSorting()" text="ASC"></app-button>
             </li>
             <li class="buttons-list-item">
-                <app-button (clickEmitter)="onDscSortingByName()" text="DESC"></app-button>
+                <app-button (clickEmitter)="onDescSorting()" text="DESC"></app-button>
             </li>
         </ul>
 

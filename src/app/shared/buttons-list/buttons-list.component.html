@@ -1,16 +1,18 @@
 <app-buttons-list>
-    <ul class="buttons-list">
-        <li>
-            <app-button (clickEmitter)="clickHandler1()" text="Filter"></app-button>
-        </li>
-        <li>
-            <app-button (clickEmitter)="clickHandler2()" text="Sort By Dropdown"></app-button>
-        </li>
-        <li>
-            <app-button (clickEmitter)="clickHandler3()" text="ASC"></app-button>
-        </li>
-        <li>
-            <app-button (clickEmitter)="clickHandler4()" text="DESC"></app-button>
-        </li>
-    </ul>
+    <form>
+        <select id="selectMethod" name="method">
+            <option value="byName">Sort by name</option>
+            <option value="byDate">Sort by date</option>
+        </select>
+        <ul class="buttons-list">
+            <li>
+                <app-button (clickEmitter)="clickHandler3()" text="ASC" btnType="submit"></app-button>
+            </li>
+            <li>
+                <app-button (clickEmitter)="clickHandler4()" text="DESC" btnType="submit"></app-button>
+            </li>
+        </ul>
+
+    </form>
+
 </app-buttons-list>

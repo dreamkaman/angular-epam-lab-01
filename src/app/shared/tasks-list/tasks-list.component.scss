@@ -1,6 +1,7 @@
 .block-task {
   width: 25vw;
   max-width: 450px;
+  min-height: 100%;
 
   text-align: center;
 }
@@ -14,6 +15,7 @@
 }
 
 .wrapper {
+  height: 100%;
   padding: 10px;
 
   border-radius: 5px;

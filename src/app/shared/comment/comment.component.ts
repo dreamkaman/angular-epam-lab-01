@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-comment',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./comment.component.scss']
 })
 export class CommentComponent implements OnInit {
-  commentText: string = '';
+  @Input() commentText: string = 'This is a default text of the comment component! This is a default text of the comment component! This is a default text of the comment component!';
   constructor() { }
 
   ngOnInit(): void {

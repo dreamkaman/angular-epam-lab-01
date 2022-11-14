@@ -7,13 +7,13 @@
                 </app-filter>
             </li>
             <li>
-                <app-button (clickEmitter)="onSortBtnClick()" text="Sort by dropdown"></app-button>
+                <app-button (clickEmitter)="onSortBtnClick()" [text]="sortType"></app-button>
             </li>
             <li>
-                <app-button (clickEmitter)="onAscSortByDetailName()" text="ASC"></app-button>
+                <app-button (clickEmitter)="onAscSort()" text="ASC"></app-button>
             </li>
             <li>
-                <app-button (clickEmitter)="onDscSortByDetailName()" text="DESC"></app-button>
+                <app-button (clickEmitter)="onDescSort()" text="DESC"></app-button>
             </li>
         </ul>
     </div>

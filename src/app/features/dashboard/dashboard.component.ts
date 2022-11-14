@@ -18,10 +18,13 @@ import * as dashboardActions from '../dashboard/dashboard.actions';
 
 export class DashboardComponent implements
   OnInit {
-  @Input() boards: Observable<BoardItem[]> = this.store.select(selectBoards);
+  // @Input() boards: Observable<BoardItem[]> = this.store.select(selectBoards);
+  boards: Observable<BoardItem[]> = this.store.select(selectBoards);
 
   auth_token = getValue(this.store.select(selectToken));
 
+  sortType: string = 'Sort by name';
+  // sortState: boolean = true;
 
   constructor(private store: Store<GlobalState>,
     private dashBoardService: DashboardService,
@@ -50,8 +53,13 @@ export class DashboardComponent implements
     console.log("Hello1!");
   }
 
-  clickHandler2() {
-    console.log("Hello2!");
+  onSetSortType() {
+    if (this.sortType === 'Sort by name') {
+      this.sortType = 'Sort by date'
+      return
+    }
+
+    this.sortType = 'Sort by name';
   }
 
   onFilterClick(filterText: string) {
@@ -66,7 +74,7 @@ export class DashboardComponent implements
     this.store.dispatch(dashboardActions.ascSortingByBoardName());
   }
 
-  onDscSortingByName() {
+  onDescSortingByName() {
     this.store.dispatch(dashboardActions.dscSortingByBoardName());
   }
 
@@ -74,8 +82,24 @@ export class DashboardComponent implements
     this.store.dispatch(dashboardActions.ascSortingByBoardDate());
   }
 
-  onDscSortingByDate() {
-    this.store.dispatch(dashboardActions.dscSortingByBoardName());
+  onDescSortingByDate() {
+    this.store.dispatch(dashboardActions.dscSortingByBoardDate());
+  }
+
+  onAscSorting() {
+    switch (this.sortType) {
+      case 'Sort by name': this.onAscSortingByName(); break;
+      case 'Sort by date': this.onAscSortingByDate(); break;
+      default: console.log('Something went wrong!');
+    }
+  }
+
+  onDescSorting() {
+    switch (this.sortType) {
+      case 'Sort by name': this.onDescSortingByName(); break;
+      case 'Sort by date': this.onDescSortingByDate(); break;
+      default: console.log('Something went wrong!');
+    }
   }
 
   getAllBoards() {

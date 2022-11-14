@@ -8,6 +8,9 @@ import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Status } from '../tasks-list/tasks-list.service';
 import * as detailsActions from '../../features/details/details.actions';
+import { Observable } from 'rxjs';
+import { selectComments } from './task.selectors';
+import { CommentState } from './task.reducer';
 
 @Component({
   selector: 'app-task',
@@ -21,6 +24,8 @@ export class TaskComponent implements OnInit {
 
   @Output() taskEmitter = new EventEmitter<string>;
   @Output() addCommentEmitter = new EventEmitter;
+  // comments: Observable<Comment[]> = this.store.select(selectComments);
+  comments: Observable<CommentState> = this.store.select(selectComments);
 
 
   BASE_URL: string = 'http://localhost:4000/api';
