@@ -8,5 +8,6 @@ const DELETE_COMMENT = 'DELETE_COMMENT';
 const CLEAR_COMMENTS = 'CLEAR_COMMENTS';
 
 export const addComments = createAction(ADD_COMMENTS, props<{ comments: CommentItem[] }>());
-export const addComment = createAction(ADD_COMMENT, props<{ comment: CommentItem }>())
+export const addComment = createAction(ADD_COMMENT, props<{ comment: CommentItem }>());
+export const deleteComment = createAction(DELETE_COMMENT, props<{ comment: CommentItem }>());
 export const clearComments = createAction(CLEAR_COMMENTS);

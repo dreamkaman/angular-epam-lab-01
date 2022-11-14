@@ -21,5 +21,12 @@ export const commentsReducer = createReducer<CommentsState>(
     on(taskActions.addComment, (state, { comment }) => ({
         comments: [...state.comments, comment]
     })),
+    on(taskActions.deleteComment, (state, { comment }) => {
+        const copyComments: CommentItem[] = [...state.comments];
+        return {
+            comments: [...copyComments.filter(item => item.commentId !== comment.commentId)]
+        }
+    }
+    ),
     on(taskActions.clearComments, (_state) => ({ comments: [] }))
 )

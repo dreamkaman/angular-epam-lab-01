@@ -16,7 +16,9 @@
 
     <ul class="comments-list">
         <li class="comments-list-item" *ngFor="let comment of comments|async|taskFilterSync:idTask">
-            <app-comment [commentText]="comment.text"></app-comment>
+            <app-comment [commentText]="comment.text" [commentId]="comment._id"
+                (delCommentEmitter)="onDelComment($event,idTask)">
+            </app-comment>
         </li>
     </ul>
 

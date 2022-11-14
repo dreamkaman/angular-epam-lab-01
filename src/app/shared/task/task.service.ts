@@ -66,4 +66,17 @@ export class TaskService {
       }
     ) as Observable<CommentItem>;
   }
+
+  deleteComment(idTask: string, commentId: string) {
+    const delURL = this.BASE_URL + this.router.url + '/' + idTask + '/comments/' + commentId;
+    const auth_token = getValue(this.store.select(selectToken));
+    return this.http.delete(
+      delURL,
+      {
+        headers: {
+          "Authorization": `Bearer ${auth_token}`
+        }
+      }
+    ) as Observable<CommentItem>;
+  }
 }

@@ -1,6 +1,6 @@
-<div class="comment-wrapper">
+<div class="comment-wrapper" [id]="commentId">
     <p class="comment-text">{{commentText}}</p>
-    <button class="btn-close" type="button">
+    <button class="btn-close" type="button" (click)="delCommentEmitter.emit(commentId)">
         <img src="../../../assets/images/close-red.png" alt="Close icon">
     </button>
 </div>

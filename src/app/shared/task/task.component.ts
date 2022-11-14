@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { DetailsService } from 'src/app/features/details/details.service';
 import { ContextMenuService } from '../context-menu/context-menu.service';
 import { TaskService } from './task.service';
 
@@ -58,5 +56,16 @@ export class TaskComponent implements OnInit {
           this.store.dispatch(taskActions.addComments({ comments }))
         }
       })
+  }
+
+  onDelComment(commentId: string, idTask: string) {
+
+    this.taskService.deleteComment(idTask, commentId)
+      .subscribe({
+        next: comment => {
+          this.store.dispatch(taskActions.deleteComment({ comment }));
+        },
+        error: err => console.log(err)
+      });
   }
 }
