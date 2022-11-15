@@ -55,7 +55,6 @@ export class DetailsComponent implements OnInit {
 
   ngOnDestroy() {
     this.store.dispatch(taskActions.clearComments());
-    console.log('ngOnDestroy is working!');
   }
 
   onFilterNameBtnClick(filterText: string) {

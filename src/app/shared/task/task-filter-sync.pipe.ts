@@ -7,7 +7,6 @@ import { CommentItem } from './task.reducer';
 export class TaskFilterSyncPipe implements PipeTransform {
 
   transform(comments: CommentItem[] | null, detailId: string): any {
-    console.log('Pipe is working!');
 
     if (comments) {
       return comments.filter(comment => comment.detailId === detailId);
