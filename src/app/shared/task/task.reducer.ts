@@ -24,14 +24,9 @@ export const commentsReducer = createReducer<CommentsState>(
     on(taskActions.deleteComment, (state, { comment }) => {
         const copyComments: CommentItem[] = [...state.comments];
 
-        console.log(comment._id);
-
         return {
             ...state,
-            comments: copyComments.filter(item => {
-                console.log(item);
-                return item._id !== comment._id
-            })
+            comments: copyComments.filter(item => item._id !== comment._id)
         }
     }
     ),

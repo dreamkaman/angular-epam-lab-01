@@ -1,5 +1,6 @@
 import { createSelector } from "@ngrx/store";
 import { Observable } from "rxjs";
+import { CommentItem } from "src/app/shared/task/task.reducer";
 import { GlobalState } from "src/store/models/store.model";
 
 //
@@ -24,6 +25,12 @@ export const selectBoards = createSelector(
 
 export function getValue(observable: Observable<string | null>) {
     let value: string | null = null;
+    observable.subscribe(data => value = data);
+    return value
+}
+
+export function getCommentsArray(observable: Observable<CommentItem[]>) {
+    let value: CommentItem[] = [];
     observable.subscribe(data => value = data);
     return value
 }

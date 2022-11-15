@@ -10,6 +10,7 @@ import { selectComments } from './task.selectors';
 import { CommentItem } from './task.reducer';
 import * as taskActions from './task.actions';
 import { ModalWindowService } from '../modal-window/modal-window.service';
+import { getCommentsArray } from '../../features/dashboard/dashboard.selectors';
 
 @Component({
   selector: 'app-task',
@@ -40,7 +41,10 @@ export class TaskComponent implements OnInit {
     this.taskService.setIdTask(this.idTask);
     this.contextMenuService.setTaskName(this.taskName);
 
-    this.getComments();
+    if (!getCommentsArray(this.store.select(selectComments)).length) {
+      this.getComments();
+    }
+
   }
 
   onAddComment(idTask: string) {
@@ -50,6 +54,8 @@ export class TaskComponent implements OnInit {
   }
 
   getComments() {
+    console.log('I am working!');
+
     this.taskService.getDetailComments()
       .subscribe({
         next: comments => {
