@@ -126,12 +126,11 @@ export class DetailsComponent implements OnInit {
       },
       error: err => console.log(err)
     });
+
   }
 
   archivingTask(idTask: string) {
-    console.log('Click archivingTask!');
     const auth_token = dashboardSelectors.getValue(this.store.select(dashboardSelectors.selectToken));
-    console.log(auth_token);
     const patchURL = this.BASE_URL + this.router.url + '/' + idTask;
     const newStatus: Status = 'archived';
 

@@ -54,8 +54,6 @@ export class TaskComponent implements OnInit {
   }
 
   getComments() {
-    console.log('I am working!');
-
     this.taskService.getDetailComments()
       .subscribe({
         next: comments => {
