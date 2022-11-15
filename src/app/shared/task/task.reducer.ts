@@ -2,7 +2,7 @@ import { createReducer, on } from "@ngrx/store"
 import * as taskActions from './task.actions';
 
 export interface CommentItem {
-    commentId: string,
+    _id: string,
     text: string,
     detailId: string
 }
@@ -23,8 +23,15 @@ export const commentsReducer = createReducer<CommentsState>(
     })),
     on(taskActions.deleteComment, (state, { comment }) => {
         const copyComments: CommentItem[] = [...state.comments];
+
+        console.log(comment._id);
+
         return {
-            comments: [...copyComments.filter(item => item.commentId !== comment.commentId)]
+            ...state,
+            comments: copyComments.filter(item => {
+                console.log(item);
+                return item._id !== comment._id
+            })
         }
     }
     ),
